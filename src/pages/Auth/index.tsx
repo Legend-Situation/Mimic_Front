@@ -1,11 +1,10 @@
 import React from 'react';
+import * as _ from './style';
 
 const Auth = () => {
-  return (
-    <div>
-      
-    </div>
-  );
+  return <_.Auth_Container>
+    
+  </_.Auth_Container>;
 };
 
 export default Auth;
