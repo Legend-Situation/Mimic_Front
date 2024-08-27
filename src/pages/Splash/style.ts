@@ -1,9 +1,10 @@
+import { theme } from 'lib/utils/style/theme';
 import styled from 'styled-components';
 
 export const Splash_Container = styled.div`
   width: 100vw;
   height: 100vh;
-  background-color: #0057ff;
+  background-color: ${theme.primary[7]};
   display: flex;
   flex-direction: column;
   justify-content: center;
