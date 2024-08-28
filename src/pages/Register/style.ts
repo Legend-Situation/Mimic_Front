@@ -34,3 +34,7 @@ export const Register_Inputs = styled.div`
   flex-direction: column;
   gap: 20px;
 `;
+
+export const Register_Button = styled.div`
+  margin-top: 77px;
+`;

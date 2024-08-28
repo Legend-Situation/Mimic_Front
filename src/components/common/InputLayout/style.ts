@@ -4,7 +4,6 @@ import styled from 'styled-components';
 export const InputLayout_Container = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px;
   gap: 8px;
 `;
 
