@@ -33,3 +33,8 @@ export const ChatList_Add = styled.div`
   font-weight: 400;
   cursor: pointer;
 `;
+
+export const ChatList_Chats = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
