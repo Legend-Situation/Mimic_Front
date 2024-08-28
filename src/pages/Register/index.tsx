@@ -55,7 +55,7 @@ const Register = () => {
           <InputLayout
             value={inputs.id}
             name="id"
-            title="id"
+            title="아이디"
             placeholder="아이디를 입력해주세요"
             onChange={handleInputValue}
           />

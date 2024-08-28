@@ -4,7 +4,7 @@ import Main from 'pages/Main';
 import Splash from 'pages/Splash';
 import Auth from 'pages/Auth';
 import Register from 'pages/Register';
-
+import Login from 'pages/Login';
 
 export default function Router() {
   return useRoutes([
@@ -14,7 +14,8 @@ export default function Router() {
         { index: true, element: <Main /> },
         { path: '/splash', element: <Splash /> },
         { path: '/auth', element: <Auth /> },
-        { path: '/register', element: <Register /> }
+        { path: '/register', element: <Register /> },
+        { path: '/login', element: <Login /> }
       ]
     }
     // { path: '*', element: <NotFound /> }
