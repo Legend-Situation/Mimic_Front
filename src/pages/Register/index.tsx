@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import * as _ from './style';
-import MainHeader from 'components/MainHeader';
+import MainHeader from 'components/Headers/MainHeader';
 import Logo from 'assets/icon/Logo';
 import InputLayout from 'components/common/InputLayout';
 import ButtonLayout from 'components/common/ButtonLayout';
