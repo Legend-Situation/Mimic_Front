@@ -1,16 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import * as _ from './style';
 
 interface InputLayoutProps {
   title: string;
   placeholder: string;
+  name: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  type?: string;
 }
 
-const InputLayout = ({ title, placeholder }: InputLayoutProps) => {
-  const [input, setInput] = useState('');
-  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInput(e.target.value);
-  };
+const InputLayout = ({
+  title,
+  placeholder,
+  name,
+  value,
+  onChange,
+  type = 'text'
+}: InputLayoutProps) => {
   return (
     <_.InputLayout_Container>
       <_.InputLayout_Input_Title>
@@ -18,10 +25,12 @@ const InputLayout = ({ title, placeholder }: InputLayoutProps) => {
         <_.InputLayout_Input_Title_Star>*</_.InputLayout_Input_Title_Star>
       </_.InputLayout_Input_Title>
       <_.InputLayout_Box
-        type="text"
+        type={type}
         placeholder={placeholder}
-        onChange={handleInput}
         autoComplete="off"
+        value={value}
+        name={name}
+        onChange={onChange}
       />
     </_.InputLayout_Container>
   );
