@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { theme } from '../../lib/utils/style/theme';
+import { theme } from 'lib/utils/style/theme';
 
 export const MainHeader_Container = styled.div<{ isOnChatting?: boolean }>`
   width: 100vw;
