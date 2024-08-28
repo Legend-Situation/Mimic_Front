@@ -4,7 +4,7 @@ import styled from 'styled-components';
 export const Auth_Container = styled.div`
   width: 100vw;
   height: 100vh;
-  padding: 70px 0 0 24px;
+  padding: 70px 24px 0 24px;
   display: flex;
   flex-direction: column;
 `;
@@ -28,8 +28,8 @@ export const Auth_Title_Highlight = styled.span`
 
 export const Auth_MainImg = styled.div`
   text-align: center;
-  margin-right: 24px;
   margin-top: 100px;
+  margin-bottom: 100px;
 `;
 
 export const Auth_MainImg_Bubble = styled.div`
@@ -38,4 +38,19 @@ export const Auth_MainImg_Bubble = styled.div`
   right: 0;
   transform: translate(0%, -50%);
   z-index: -1;
+`;
+
+export const Auth_Buttons = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: ${theme.gray[400]};
+`;
+
+export const Auth_Buttons_Register = styled.div`
+  font-size: 16px;
+  color: ${theme.gray.black};
 `;

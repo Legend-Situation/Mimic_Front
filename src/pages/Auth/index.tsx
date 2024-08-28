@@ -2,6 +2,7 @@ import React from 'react';
 import * as _ from './style';
 import AuthLogo from 'assets/image/authLogo.png';
 import Bubble from 'assets/image/Bubble';
+import ButtonLayout from 'components/common/ButtonLayout';
 
 const Auth = () => {
   return (
@@ -18,7 +19,18 @@ const Auth = () => {
         </_.Auth_MainImg_Bubble>
       </_.Auth_MainImg>
 
-      
+      <_.Auth_Buttons>
+        <ButtonLayout
+          value="로그인"
+          onClick={() => {
+            return 0;
+          }}
+          width="100%"
+          state={true}
+        />
+        또는
+        <_.Auth_Buttons_Register>회원가입</_.Auth_Buttons_Register>
+      </_.Auth_Buttons>
     </_.Auth_Container>
   );
 };
