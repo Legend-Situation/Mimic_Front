@@ -6,6 +6,7 @@ export const ChatHeader_Layout = styled.div`
   padding: 5px 24px;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 1px solid ${theme.gray[50]};
 `;
 
 export const ChatHeader_Title = styled.p`
