@@ -9,7 +9,8 @@ const AddPartner = () => {
   return (
     <_.AddPartner_Container>
       <MainHeader title="상대방 추가"/>
-      <ProfileLayout/>
+      <ProfileLayout show={true}/>
+
     </_.AddPartner_Container>
   );
 };

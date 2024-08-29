@@ -25,9 +25,9 @@ export const ProfileLayout_Image = styled.img`
   border: 1px solid  ${theme.gray[100]};
 `;
 
-export const ProfileLayout_ProfileEdit = styled.div`
-  position: absolute;
-  bottom: -1px;
-  right: -4px;
-
+export const ProfileLayout_ProfileEdit = styled.div<{ show: boolean }>`
+position: absolute;
+bottom: -1px;
+right: -4px;
+display: ${({ show }) => (show ? 'block' : 'none')};  // show에 따라 display 설정
 `;
