@@ -3,19 +3,19 @@ import React from 'react';
 
 // 파일
 import * as _ from './style';
+import Loading from 'components/Loading';
 
 interface MessageProps {
   role: string;
   message: string;
   isLoading: boolean;
-  children?: React.ReactNode;
 }
 
 const Message = ({ role, message: msg, isLoading }: MessageProps) => {
   return (
-    <_.Message_Container role={role}>
-      {isLoading ? msg : msg}
-    </_.Message_Container>
+    <div>
+      <_.Message_Box role={role}>{isLoading ? <Loading /> : msg}</_.Message_Box>
+    </div>
   );
 };
 
