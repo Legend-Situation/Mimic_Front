@@ -16,7 +16,7 @@ export const AddPartner_Container = styled.div`
   flex-direction: column;
 `;
 
-export const AddPartner_GenderLayout = styled.div`
+export const AddPartner_Box = styled.div`
   width: 100%;
   gap: 8px;
 `;
@@ -51,7 +51,7 @@ export const AddPartner_TraitsInput = styled.textarea`
   color: ${theme.gray.black};
   font-size: 15px;
   font-weight: 500;
-  resize: none; 
+  resize: none;
   max-width: 100%;
   max-height: 150px;
   width: 100%;
@@ -62,13 +62,20 @@ export const AddPartner_TraitsInput = styled.textarea`
   }
   &::placeholder {
     color: ${theme.gray[300]};
-
   }
 `;
 
-export const CharCount = styled.div`
+export const AddPartner_CharCount = styled.div`
   text-align: right;
   color: ${theme.gray[200]};
   font-size: 13px;
   margin-top: 5px;
+`;
+
+export const AddPartner_UploadLabel = styled.label`
+  display: block;
+  margin-bottom: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  color: ${theme.gray.black};
 `;

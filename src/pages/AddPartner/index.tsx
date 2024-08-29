@@ -5,6 +5,7 @@ import MainHeader from 'components/Headers/MainHeader';
 import ProfileLayout from 'components/common/ProfileLayout';
 import InputLayout from 'components/common/InputLayout';
 import GenderButton from 'components/common/GenderButton';
+import ChatUpload from 'components/common/ChatUpload';
 
 const AddPartner = () => {
   const [inputs, setInputs] = useState({
@@ -62,7 +63,7 @@ const AddPartner = () => {
           placeholder="상대방의 나이를 입력하세요."
           onChange={handleInputValue}
         />
-        <_.AddPartner_GenderLayout>
+        <_.AddPartner_Box>
           <_.AddPartner_Label>성별</_.AddPartner_Label>
           <_.AddPartner_GenderGroup>
             <GenderButton
@@ -76,14 +77,20 @@ const AddPartner = () => {
               onClick={() => handleGenderSelect('male')}
             />
           </_.AddPartner_GenderGroup>
-        </_.AddPartner_GenderLayout>
+        </_.AddPartner_Box>
+        <_.AddPartner_Box>
         <_.AddPartner_Label>특징</_.AddPartner_Label>
         <_.AddPartner_TraitsInput
           placeholder="상대방에 대해 알려주세요! (말투, 성격, mbti, 직업, 좋아하는 것 등)"
           value={inputs.traits}
           onChange={handleTraitsChange}
-        />
-        <_.CharCount>{traitsLength}/500</_.CharCount>
+          />
+        <_.AddPartner_CharCount>{traitsLength}/500</_.AddPartner_CharCount>
+          </_.AddPartner_Box>
+          <_.AddPartner_Box>
+          <_.AddPartner_UploadLabel>1:1 대화 내용 업로드</_.AddPartner_UploadLabel>
+          <ChatUpload/>
+          </_.AddPartner_Box>
       </_.AddPartner_Container>
     </_.AddPartner_Layout>
   );
