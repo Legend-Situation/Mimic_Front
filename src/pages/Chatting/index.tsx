@@ -8,7 +8,7 @@ import chatLog from 'data/chatLog';
 
 const Chatting = () => {
   const [message, setMessage] = useState<string>('');
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const messageEndRef = useRef<HTMLDivElement | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
@@ -59,7 +59,7 @@ const Chatting = () => {
             value={message}
             placeholder="메시지 보내기..."
             rows={1}
-            maxLength={100}
+            maxLength={150}
             ref={textareaRef}
             onChange={(e) => resizeHeight(textareaRef, e)}
             onKeyDown={(e) => {
