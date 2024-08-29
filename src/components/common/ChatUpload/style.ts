@@ -6,14 +6,18 @@ export const ChatUpload_Frame = styled.div`
   flex-direction: column;
   width: 100%;
 `;
+
 export const ChatUpload_Layout = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;
+  height: 130px;
   padding: 16px;
   border-radius: 8px;
-  background: ${theme.gray[50]};
+  background: ${({ isUploaded }) =>
+    isUploaded ? theme.primary[6] : theme.gray[50]};
+  color: ${({ isUploaded }) => (isUploaded ? 'white' : theme.gray.black)};
 `;
 
 export const ChatUpload_TextContainer = styled.div`
@@ -21,16 +25,16 @@ export const ChatUpload_TextContainer = styled.div`
   text-align: left;
 `;
 
-export const ChatUpload_Title = styled.h1`
+export const ChatUpload_Title = styled.p`
   font-size: 17px;
   font-weight: 600;
   margin-bottom: 4px;
-  color: ${theme.gray.black};
-`;
+  color: ${({ isUploaded }) => (isUploaded ? 'white' : theme.gray.black)};
+  `;
 
 export const ChatUpload_Description = styled.p`
   font-size: 13px;
-  color: ${theme.primary[6]};
+  color: ${({ isUploaded }) => (isUploaded ? 'white' : theme.primary[6])};
 `;
 
 export const ChatUpload_ButtonContainer = styled.div`
@@ -43,8 +47,9 @@ export const ChatUpload_Button = styled.button`
   display: flex;
   border: none;
   border-radius: 72px;
-  background-color: ${theme.primary[6]};
-  color: white;
+  background-color: ${({ isUploaded }) =>
+    isUploaded ? 'white' : theme.primary[6]};
+  color: ${({ isUploaded }) => (isUploaded ? theme.gray.black : theme.gray.white)};
   font-size: 14px;
   height: 40px;
   padding: 12px 14px;
@@ -54,7 +59,8 @@ export const ChatUpload_Button = styled.button`
   gap: 2px;
   cursor: pointer;
   &:hover {
-    background-color: ${theme.primary[5]};
+    background-color: ${({ isUploaded }) =>
+      isUploaded ? theme.gray.white : theme.primary[5]};
   }
 `;
 
@@ -68,4 +74,5 @@ export const ChatUpload_Delete = styled.div`
   position: absolute;
   top: -16px;
   right: -16px;
+  cursor: pointer;
 `;
