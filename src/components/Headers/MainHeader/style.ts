@@ -27,8 +27,16 @@ export const MainHeader_Title = styled.div`
   font-weight: 600;
 `;
 
+export const MainHeader_Control = styled.p<{ control?: string }>`
+  color: ${({ control }) =>
+    control == '저장' ? theme.sub.red : theme.primary[6]};
+  font-size: 17px;
+  font-weight: 600;
+  line-height: normal;
+`;
+
 export const MainHeader_Button = styled.div<{ ButtonColor?: string }>`
-  color: ${(props) => props.ButtonColor};
+  color: ${({ ButtonColor }) => ButtonColor};
   font-size: 15px;
   font-weight: 500;
 `;

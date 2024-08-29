@@ -10,16 +10,19 @@ import Property from 'assets/icon/Property';
 interface MainHeaderProps {
   title: string;
   propertyIcon?: boolean;
+  control?: '편집' | '저장';
 }
 
-const MainHeader = ({ title, propertyIcon = false }: MainHeaderProps) => {
+const MainHeader = ({
+  title,
+  propertyIcon = false,
+  control
+}: MainHeaderProps) => {
   const navigate = useNavigate();
 
   const handleBackIcon = () => {
     navigate(-1);
   };
-
-  console.log(title);
 
   return (
     <_.MainHeader_Container>
@@ -33,6 +36,11 @@ const MainHeader = ({ title, propertyIcon = false }: MainHeaderProps) => {
             return;
           }}
         />
+      )}
+      {control ? (
+        <_.MainHeader_Control control={control}>{control}</_.MainHeader_Control>
+      ) : (
+        ''
       )}
     </_.MainHeader_Container>
   );

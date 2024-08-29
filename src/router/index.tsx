@@ -13,12 +13,11 @@ export default function Router() {
     {
       path: '/',
       children: [
-        { index: true, element: <Main /> },
+        { index: true, element: <ChatList /> },
         { path: '/splash', element: <Splash /> },
         { path: '/auth', element: <Auth /> },
         { path: '/register', element: <Register /> },
         { path: '/login', element: <Login /> },
-        { path: '/chatList', element: <ChatList /> },
         { path: '/chatting/:id', element: <Chatting /> }
       ]
     }
