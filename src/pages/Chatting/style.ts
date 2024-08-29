@@ -6,6 +6,7 @@ export const Chatting_Layout = styled.div`
   height: 100vh;
   display: flex;
   flex-direction: column;
+  padding-bottom: 20px;
 `;
 
 export const Chatting_Content = styled.div`
@@ -45,20 +46,21 @@ export const Chatting_Typing_Box = styled.div`
   align-items: end;
   border-radius: 50px;
   border: 1px solid ${theme.gray[100]};
-  padding: 13px 24px 13px 24px;
+  padding: 13px 24px;
 `;
 
 export const Chatting_Textarea = styled.textarea`
   width: 86%;
   height: auto;
   max-height: 100px;
+  padding: 2px;
   border: none;
   outline: none;
   color: ${theme.gray.black};
   &::placeholder {
     color: ${theme.gray[200]};
   }
-  font-size: 14px;
+  font-size: 17px;
   font-weight: 400;
   resize: none;
   overflow-y: auto;
