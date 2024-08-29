@@ -2,7 +2,7 @@ import { theme } from 'lib/utils/style/theme';
 import styled from 'styled-components';
 
 export const ProfileLayout_Layout = styled.div`
-  width: 100vw;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -29,5 +29,5 @@ export const ProfileLayout_ProfileEdit = styled.div<{ show: boolean }>`
 position: absolute;
 bottom: -1px;
 right: -4px;
-display: ${({ show }) => (show ? 'block' : 'none')};  // show에 따라 display 설정
+display: ${({ show }) => (show ? 'block' : 'none')};
 `;

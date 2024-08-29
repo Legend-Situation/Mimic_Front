@@ -11,7 +11,7 @@ const ProfileLayout = ({ show }: ProfileLayoutProps) => {
   return (
     <_.ProfileLayout_Layout>
       <_.ProfileLayout_Container>
-        <_.ProfileLayout_Image src={Profile} alt="Profile" />
+        <_.ProfileLayout_Image src={Profile} />
         <_.ProfileLayout_ProfileEdit show={show}>
           <ProfileEdit />
         </_.ProfileLayout_ProfileEdit>
