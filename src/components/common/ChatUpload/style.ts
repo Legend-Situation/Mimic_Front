@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 import { theme } from 'lib/utils/style/theme';
 
-
-export const ChatUpload_Frame= styled.div`
+export const ChatUpload_Frame = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
 `;
 export const ChatUpload_Layout = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -41,7 +41,6 @@ export const ChatUpload_ButtonContainer = styled.div`
 
 export const ChatUpload_Button = styled.button`
   display: flex;
-  width: 50%;
   border: none;
   border-radius: 72px;
   background-color: ${theme.primary[6]};
@@ -63,4 +62,10 @@ export const ChatUpload_Info = styled.p`
   font-size: 12px;
   color: ${theme.gray[300]};
   margin-top: 8px;
+`;
+
+export const ChatUpload_Delete = styled.div`
+  position: absolute;
+  top: -16px;
+  right: -16px;
 `;
