@@ -6,6 +6,7 @@ import Auth from 'pages/Auth';
 import Register from 'pages/Register';
 import Login from 'pages/Login';
 import ChatList from 'pages/ChatList';
+import Chatting from 'pages/Chatting';
 
 export default function Router() {
   return useRoutes([
@@ -17,7 +18,8 @@ export default function Router() {
         { path: '/auth', element: <Auth /> },
         { path: '/register', element: <Register /> },
         { path: '/login', element: <Login /> },
-        { path: '/chatList', element: <ChatList /> }
+        { path: '/chatList', element: <ChatList /> },
+        { path: '/chatting/:id', element: <Chatting /> }
       ]
     }
     // { path: '*', element: <NotFound /> }
