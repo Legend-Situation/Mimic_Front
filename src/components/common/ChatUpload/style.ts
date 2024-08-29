@@ -1,13 +1,17 @@
 import styled from 'styled-components';
 import { theme } from 'lib/utils/style/theme';
 
+interface ChatUploadProps {
+  isUploaded: boolean;
+}
+
 export const ChatUpload_Frame = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
 `;
 
-export const ChatUpload_Layout = styled.div`
+export const ChatUpload_Layout = styled.div<ChatUploadProps>`
   position: relative;
   display: flex;
   flex-direction: column;
@@ -25,14 +29,14 @@ export const ChatUpload_TextContainer = styled.div`
   text-align: left;
 `;
 
-export const ChatUpload_Title = styled.p`
+export const ChatUpload_Title = styled.p<ChatUploadProps>`
   font-size: 17px;
   font-weight: 600;
   margin-bottom: 4px;
   color: ${({ isUploaded }) => (isUploaded ? 'white' : theme.gray.black)};
-  `;
+`;
 
-export const ChatUpload_Description = styled.p`
+export const ChatUpload_Description = styled.p<ChatUploadProps>`
   font-size: 13px;
   color: ${({ isUploaded }) => (isUploaded ? 'white' : theme.primary[6])};
 `;
@@ -43,13 +47,13 @@ export const ChatUpload_ButtonContainer = styled.div`
   margin-top: auto;
 `;
 
-export const ChatUpload_Button = styled.button`
+export const ChatUpload_Button = styled.button<ChatUploadProps>`
   display: flex;
   border: none;
   border-radius: 72px;
   background-color: ${({ isUploaded }) =>
     isUploaded ? 'white' : theme.primary[6]};
-  color: ${({ isUploaded }) => (isUploaded ? theme.gray.black : theme.gray.white)};
+  color: ${({ isUploaded }) => (isUploaded ? theme.gray.black : 'white')};
   font-size: 14px;
   height: 40px;
   padding: 12px 14px;
@@ -75,4 +79,8 @@ export const ChatUpload_Delete = styled.div`
   top: -16px;
   right: -16px;
   cursor: pointer;
+`;
+
+export const ChatUpload_HiddenFileInput = styled.input`
+  display: none;
 `;

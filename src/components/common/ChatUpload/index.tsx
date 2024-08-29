@@ -1,12 +1,12 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, ChangeEvent } from 'react';
 import * as _ from './style';
 import Plus from 'assets/icon/Plus';
 import Delete from 'assets/icon/Delete';
 import Refresh from 'assets/icon/Refresh';
 
-const ChatUpload = () => {
-  const [isUploaded, setIsUploaded] = useState(false); // 업로드 상태 관리
-  const fileInputRef = useRef(null);
+function ChatUpload() {
+  const [isUploaded, setIsUploaded] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleButtonClick = () => {
     if (fileInputRef.current) {
@@ -14,8 +14,8 @@ const ChatUpload = () => {
     }
   };
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
     if (file) {
       console.log('파일 선택됨:', file.name);
       setIsUploaded(true);
@@ -23,9 +23,9 @@ const ChatUpload = () => {
   };
 
   const handleDeleteClick = () => {
-    setIsUploaded(false); // 업로드 상태 초기화
+    setIsUploaded(false);
     if (fileInputRef.current) {
-      fileInputRef.current.value = null; // 파일 입력 필드 값 초기화
+      fileInputRef.current.value = '';
     }
   };
 
@@ -71,14 +71,13 @@ const ChatUpload = () => {
         )}
       </_.ChatUpload_Frame>
 
-      <input
+      <_.ChatUpload_HiddenFileInput
         type="file"
         ref={fileInputRef}
-        style={{ display: 'none' }}
         onChange={handleFileChange}
       />
     </>
   );
-};
+}
 
 export default ChatUpload;
