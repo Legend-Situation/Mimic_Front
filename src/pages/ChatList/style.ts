@@ -4,7 +4,7 @@ import styled from 'styled-components';
 export const ChatList_Layout = styled.div`
   display: flex;
   width: 100%;
-  height: calc(100vh - 35px);
+  height: calc(100vh - 40px);
   flex-direction: column;
 `;
 

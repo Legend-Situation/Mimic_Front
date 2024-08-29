@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 export const Chatting_Layout = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 40px);
   display: flex;
   flex-direction: column;
   padding-bottom: 20px;
