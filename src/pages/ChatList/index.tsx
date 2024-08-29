@@ -13,10 +13,15 @@ const ChatList = () => {
       <_.ChatList_Layout>
         {chatList ? (
           <_.ChatList_Chats>
-            {/* {chatList.map((chat) => (
-              <Chat key={chat.name} />
-            ))} */}
-            <Chat />
+            {chatList.map((chat) => (
+              <Chat
+                key={chat.name}
+                image={chat.image}
+                name={chat.name}
+                content={chat.content}
+                time={chat.time}
+              />
+            ))}
           </_.ChatList_Chats>
         ) : (
           <_.ChatList_Nothing>
