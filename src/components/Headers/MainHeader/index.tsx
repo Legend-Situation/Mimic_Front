@@ -5,14 +5,14 @@ import React from 'react';
 import * as _ from './style';
 import Backward from 'assets/icon/Backward';
 import { useNavigate } from 'react-router-dom';
-import KebabIcon from 'assets/icon/KebabIcon';
+import Property from 'assets/icon/Property';
 
 interface MainHeaderProps {
   title: string;
-  kebabIcon?: boolean;
+  propertyIcon?: boolean;
 }
 
-const MainHeader = ({ title, kebabIcon = false }: MainHeaderProps) => {
+const MainHeader = ({ title, propertyIcon = false }: MainHeaderProps) => {
   const navigate = useNavigate();
 
   const handleBackIcon = () => {
@@ -27,14 +27,12 @@ const MainHeader = ({ title, kebabIcon = false }: MainHeaderProps) => {
         <Backward />
       </_.MainHeader_BackIcon>
       <_.MainHeader_Title>{title ? title : ' '}</_.MainHeader_Title>
-      {kebabIcon && (
-        <_.MainHeader_Button
+      {propertyIcon && (
+        <Property
           onClick={() => {
             return;
           }}
-        >
-          <KebabIcon />
-        </_.MainHeader_Button>
+        />
       )}
     </_.MainHeader_Container>
   );
