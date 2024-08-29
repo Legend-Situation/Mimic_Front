@@ -9,6 +9,7 @@ export const ChatUpload_Frame = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+gap: 8px;
 `;
 
 export const ChatUpload_Layout = styled.div<ChatUploadProps>`
@@ -71,7 +72,6 @@ export const ChatUpload_Button = styled.button<ChatUploadProps>`
 export const ChatUpload_Info = styled.p`
   font-size: 12px;
   color: ${theme.gray[300]};
-  margin-top: 8px;
 `;
 
 export const ChatUpload_Delete = styled.div`
@@ -83,4 +83,45 @@ export const ChatUpload_Delete = styled.div`
 
 export const ChatUpload_HiddenFileInput = styled.input`
   display: none;
+`;
+
+export const ChatUpload_DropdownContainer = styled.div`
+
+`;
+
+export const ChatUpload_DropdownWrapper = styled.div`
+  position: relative;
+  width: 100%;
+`;
+
+export const ChatUpload_Dropdown = styled.select`
+  height: 48px;
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 14px;
+  border-radius: 8px;
+  border: 1px solid ${theme.gray[300]};
+  background-color: white;
+  color: ${theme.gray.black};
+  appearance: none;
+
+  &:focus {
+    border-color:${theme.primary[6]};
+    outline: none;
+  }
+  `
+
+export const ChatUpload_Option = styled.option`
+  padding: 8px;
+  font-size: 14px;
+  color: ${theme.gray.black};
+  background-color: white;
+`;
+
+export const ChatUpload_Arrow = styled.div`
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  pointer-events: none;
 `;

@@ -3,10 +3,12 @@ import * as _ from './style';
 import Plus from 'assets/icon/Plus';
 import Delete from 'assets/icon/Delete';
 import Refresh from 'assets/icon/Refresh';
+import Down from 'assets/icon/Down';
 
 function ChatUpload() {
   const [isUploaded, setIsUploaded] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [selectedPerson, setSelectedPerson] = useState<string>('');
 
   const handleButtonClick = () => {
     if (fileInputRef.current) {
@@ -27,7 +29,17 @@ function ChatUpload() {
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
+    setSelectedPerson('');
   };
+
+  const handleSelectChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    setSelectedPerson(e.target.value);
+  };
+
+  const dummyData = [
+    { value: '강민지', label: '강민지' },
+    { value: '추성우', label: '추성우' }
+  ];
 
   return (
     <>
@@ -64,10 +76,35 @@ function ChatUpload() {
             </_.ChatUpload_Button>
           </_.ChatUpload_ButtonContainer>
         </_.ChatUpload_Layout>
+
         {!isUploaded && (
           <_.ChatUpload_Info>
             카카오톡 대화방 → 설정 → 대화 내용 내보내기 → 모든 텍스트 내부 저장소에 저장 → txt 파일 업로드 (1:1 채팅만 가능)
           </_.ChatUpload_Info>
+        )}
+
+        {isUploaded && (
+          <_.ChatUpload_DropdownContainer>
+            <_.ChatUpload_DropdownWrapper>
+              <_.ChatUpload_Dropdown
+                id="person-select"
+                value={selectedPerson}
+                onChange={handleSelectChange}
+              >
+                <_.ChatUpload_Option value="">
+                  상대방의 카카오톡 이름을 선택해주세요.
+                </_.ChatUpload_Option>
+                {dummyData.map((person) => (
+                  <_.ChatUpload_Option key={person.value} value={person.value}>
+                    {person.label}
+                  </_.ChatUpload_Option>
+                ))}
+              </_.ChatUpload_Dropdown>
+              <_.ChatUpload_Arrow>
+                <Down />
+              </_.ChatUpload_Arrow>
+            </_.ChatUpload_DropdownWrapper>
+          </_.ChatUpload_DropdownContainer>
         )}
       </_.ChatUpload_Frame>
 
