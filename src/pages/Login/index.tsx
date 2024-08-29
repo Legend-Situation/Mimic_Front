@@ -27,7 +27,7 @@ const Login = () => {
 
   return (
     <>
-      <MainHeader title="회원가입" />
+      <MainHeader title="로그인" />
       <_.Login_Layout>
         <_.Login_Header>
           <Logo />
