@@ -7,7 +7,7 @@ export const ProfileLayout_Layout = styled.div`
   justify-content: center;
   align-items: center;
   padding-top: 10px;
-  `;
+`;
 
 export const ProfileLayout_Container = styled.div`
   width: 5.625rem;
@@ -16,18 +16,20 @@ export const ProfileLayout_Container = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
-  `;
+`;
 
 export const ProfileLayout_Image = styled.img`
   width: 100%;
-  border-radius: 37.5px;
+  height: 100%;
+  border-radius: 50%;
   object-fit: cover;
-  border: 1px solid  ${theme.gray[100]};
+  border: 1px solid ${theme.gray[100]};
 `;
 
 export const ProfileLayout_ProfileEdit = styled.div<{ show: boolean }>`
-position: absolute;
-bottom: -1px;
-right: -4px;
-display: ${({ show }) => (show ? 'block' : 'none')};
+  position: absolute;
+  bottom: -1px;
+  right: -4px;
+  display: ${({ show }) => (show ? 'block' : 'none')};
+  cursor: pointer;
 `;
