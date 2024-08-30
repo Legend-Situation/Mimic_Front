@@ -33,3 +33,7 @@ export const ProfileLayout_ProfileEdit = styled.div<{ show: boolean }>`
   display: ${({ show }) => (show ? 'block' : 'none')};
   cursor: pointer;
 `;
+
+export const ProfileLayout_ProfileInput = styled.input`
+  display: none; 
+`;

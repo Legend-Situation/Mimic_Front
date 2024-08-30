@@ -31,12 +31,11 @@ const ProfileLayout = ({ show }: ProfileLayoutProps) => {
         <_.ProfileLayout_ProfileEdit show={show} onClick={handleIconClick}>
           <ProfileEdit />
         </_.ProfileLayout_ProfileEdit>
-        <input
+        <_.ProfileLayout_ProfileInput
           type="file"
           accept="image/*"
           onChange={handleImageUpload}
           ref={fileInputRef}
-          style={{ display: 'none' }}
         />
       </_.ProfileLayout_Container>
     </_.ProfileLayout_Layout>
