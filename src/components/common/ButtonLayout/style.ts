@@ -12,6 +12,7 @@ export const ButtonLayout_Button = styled.button<{ width: string }>`
   color: ${theme.gray.white};
   border-radius: 10px;
   font-size: 16px;
+  border: none;
 
   &:disabled {
     background-color: ${theme.gray[200]};

@@ -10,6 +10,7 @@ export const ChatUpload_Frame = styled.div`
   flex-direction: column;
   width: 100%;
 gap: 8px;
+margin-bottom: 20px;
 `;
 
 export const ChatUpload_Layout = styled.div<ChatUploadProps>`

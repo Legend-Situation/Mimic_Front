@@ -107,12 +107,12 @@ function ChatUpload() {
           </_.ChatUpload_DropdownContainer>
         )}
       </_.ChatUpload_Frame>
-
       <_.ChatUpload_HiddenFileInput
         type="file"
         ref={fileInputRef}
         onChange={handleFileChange}
       />
+
     </>
   );
 }
