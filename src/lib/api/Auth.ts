@@ -1,4 +1,4 @@
-import { DefaultInstance } from './customAxios';
+import { AuthInstance, DefaultInstance } from './customAxios';
 
 interface SignUpParams {
   name: string;

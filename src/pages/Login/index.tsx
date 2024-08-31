@@ -31,6 +31,9 @@ const Login = () => {
 
   const { mutate: LoginMutate } = useMutation(Auth_Login, {
     onSuccess: (res) => {
+      console.log(res);
+      localStorage.setItem('accessToken', res.accessToken);
+      localStorage.setItem('refreshToken', res.refreshToken);
       alert(res.message);
       navigate('/');
     },
