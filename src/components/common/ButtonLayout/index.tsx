@@ -7,6 +7,9 @@ interface OwnProps {
   onClick?(): void;
   width: string;
   state: boolean;
+  backgroundColor?: string;
+  borderColor?: string;
+  textColor?: string;
 }
 
 const ButtonLayout = ({
@@ -15,11 +18,21 @@ const ButtonLayout = ({
     return;
   },
   width = '100%',
-  state = false
+  state = false,
+  backgroundColor = '',
+  borderColor = '',
+  textColor = ''
 }: OwnProps) => {
   return (
     <_.ButtonLayout_Container width={width}>
-      <_.ButtonLayout_Button onClick={onClick} width={width} disabled={!state}>
+      <_.ButtonLayout_Button
+        onClick={onClick}
+        width={width}
+        disabled={!state}
+        backgroundColor={backgroundColor}
+        borderColor={borderColor}
+        textColor={textColor}
+      >
         {value}
       </_.ButtonLayout_Button>
     </_.ButtonLayout_Container>
