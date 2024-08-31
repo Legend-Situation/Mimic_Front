@@ -6,7 +6,7 @@ import InputLayout from 'components/common/InputLayout';
 import GenderButton from 'components/common/GenderButton';
 import ChatUpload from 'components/common/ChatUpload';
 import ButtonLayout from 'components/common/ButtonLayout';
-import TraitsInputLayout from 'components/common/TraitsInputLayout';
+import TraitsInputLayout from 'components/common/TraitsInputLayout';  // TraitsInputLayout 컴포넌트 가져오기
 
 const AddPartner = () => {
   const [inputs, setInputs] = useState({
@@ -28,12 +28,10 @@ const AddPartner = () => {
 
   const handleTraitsChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = e.target;
-    if (value.length <= 500) {
-      setInputs({
-        ...inputs,
-        traits: value
-      });
-    }
+    setInputs({
+      ...inputs,
+      traits: value
+    });
   };
 
   const handleGenderSelect = (gender: string) => {
@@ -84,11 +82,14 @@ const AddPartner = () => {
               />
             </_.AddPartner_GenderGroup>
           </_.AddPartner_Box>
-          < TraitsInputLayout
+          <_.AddPartner_Box>
+          <_.AddPartner_Label>특징
+            </_.AddPartner_Label>
+          <TraitsInputLayout 
             traits={inputs.traits} 
             onTraitsChange={handleTraitsChange} 
-            maxLength={500} 
-          />
+            />
+            </_.AddPartner_Box>
         </_.AddPartner_sectionGap>
         <_.AddPartner_Box>
           <_.AddPartner_UploadLabel>

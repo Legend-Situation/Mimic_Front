@@ -28,18 +28,3 @@ export const UserProfile_Label = styled.label`
   color: ${theme.gray[300]};
   margin-bottom: 8px;
 `;
-
-export const UserProfile_TextArea = styled.textarea`
-  width: 100%;
-  padding: 15px 16px;
-  border: 1px solid ${theme.gray[300]};
-  border-radius: 8px;
-  font-size: 15px;
-  color: ${theme.gray.black};
-  outline: none;
-  resize: none;
-
-  &::placeholder {
-    color: ${theme.gray[500]};
-  }
-`;
