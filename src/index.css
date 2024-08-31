@@ -3,6 +3,10 @@
   margin: 0;
   box-sizing: border-box;
   font-family: 'Pretendard-Medium';
+  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-focus-ring-color: transparent; 
+
 }
 
 /* 프리텐다드 */
