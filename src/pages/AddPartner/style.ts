@@ -17,9 +17,9 @@ export const AddPartner_Container = styled.div`
 `;
 
 export const AddPartner_sectionGap = styled.div`
-  display: flex; /* Flexbox 설정 추가 */
-  flex-direction: column; /* 자식 요소들이 세로로 정렬되도록 설정 */
-  gap: 15px; /* ProfileLayout과 InputLayout 사이의 간격 */
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
   width: 100%;
 `;
 
