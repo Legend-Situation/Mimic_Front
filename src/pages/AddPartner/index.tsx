@@ -6,7 +6,7 @@ import InputLayout from 'components/common/InputLayout';
 import GenderButton from 'components/common/GenderButton';
 import ChatUpload from 'components/common/ChatUpload';
 import ButtonLayout from 'components/common/ButtonLayout';
-import TraitsInputLayout from 'components/common/TraitsInputLayout'; 
+import TraitsInputLayout from 'components/common/TraitsInputLayout';
 
 const AddPartner = () => {
   const [inputs, setInputs] = useState({
@@ -48,9 +48,9 @@ const AddPartner = () => {
     inputs.traits !== '';
 
   return (
-    <_.AddPartner_Layout>
+    <>
       <MainHeader title="상대방 추가" />
-      <_.AddPartner_Container>
+      <_.AddPartner_Layout>
         <_.AddPartner_sectionGap>
           <ProfileLayout edit={true} />
           <InputLayout
@@ -83,13 +83,12 @@ const AddPartner = () => {
             </_.AddPartner_GenderGroup>
           </_.AddPartner_Box>
           <_.AddPartner_Box>
-          <_.AddPartner_Label>특징
-            </_.AddPartner_Label>
-          <TraitsInputLayout 
-            traits={inputs.traits} 
-            onTraitsChange={handleTraitsChange} 
+            <_.AddPartner_Label>특징</_.AddPartner_Label>
+            <TraitsInputLayout
+              traits={inputs.traits}
+              onTraitsChange={handleTraitsChange}
             />
-            </_.AddPartner_Box>
+          </_.AddPartner_Box>
         </_.AddPartner_sectionGap>
         <_.AddPartner_Box>
           <_.AddPartner_UploadLabel>
@@ -98,8 +97,8 @@ const AddPartner = () => {
           <ChatUpload />
         </_.AddPartner_Box>
         <ButtonLayout value="완료" width="100%" state={isButtonActive} />
-      </_.AddPartner_Container>
-    </_.AddPartner_Layout>
+      </_.AddPartner_Layout>
+    </>
   );
 };
 
