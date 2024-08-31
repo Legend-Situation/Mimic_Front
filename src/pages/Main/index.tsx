@@ -6,6 +6,7 @@ import { theme } from 'lib/utils/style/theme';
 import Chat from 'components/Chat';
 import { useQuery } from 'react-query';
 import { Chat_List } from 'lib/api/Chat';
+import Loading from 'assets/image/Loading.gif';
 
 type ChatItem = {
   chatId: string;
@@ -41,7 +42,7 @@ const Main = () => {
       <ChatHeader />
       <_.Main_Layout>
         {isLoading ? (
-          <div>Loading...</div>
+          <_.Main_Loading src={Loading} alt="로딩" />
         ) : chatList.length ? (
           <_.Main_Chats>
             {chatList.map((chat) => (

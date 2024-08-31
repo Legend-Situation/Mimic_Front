@@ -6,6 +6,8 @@ export const Main_Layout = styled.div`
   width: 100%;
   height: calc(100vh - 40px);
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const Main_Nothing = styled.div`
@@ -38,4 +40,9 @@ export const Main_Chats = styled.div`
   display: flex;
   flex-direction: column;
   padding-bottom: 20px;
+`;
+
+export const Main_Loading = styled.img`
+  width: 50px;
+  height: 50px;
 `;
