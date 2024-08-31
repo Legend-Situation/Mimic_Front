@@ -1,5 +1,5 @@
 // 라이브러리
-import React from 'react';
+import React, { useState } from 'react';
 
 // 파일
 import * as _ from './style';
@@ -19,9 +19,14 @@ const MainHeader = ({
   control
 }: MainHeaderProps) => {
   const navigate = useNavigate();
+  const [isEditing, setIsEditing] = useState(control === '저장');
 
   const handleBackIcon = () => {
     navigate(-1);
+  };
+
+  const handleControlClick = () => {
+    setIsEditing(!isEditing);
   };
 
   return (
@@ -38,7 +43,12 @@ const MainHeader = ({
         />
       )}
       {control ? (
-        <_.MainHeader_Control control={control}>{control}</_.MainHeader_Control>
+        <_.MainHeader_Control 
+          control={isEditing ? '저장' : '편집'}
+          onClick={handleControlClick}
+        >
+          {isEditing ? '저장' : '편집'}
+        </_.MainHeader_Control>
       ) : (
         ''
       )}

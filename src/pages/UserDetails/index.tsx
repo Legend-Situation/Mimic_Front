@@ -16,7 +16,7 @@ const UserDetails = () => {
         <ButtonLayout
           value="상대방 삭제하기"
           state={true}
-          width='100%'
+          width="100%"
           backgroundColor="#ffffff"
           borderColor="#FF6B6B"
           textColor="#ff6b6b"
