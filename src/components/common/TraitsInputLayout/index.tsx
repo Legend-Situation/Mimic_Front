@@ -4,13 +4,14 @@ import React, { useState, useEffect } from 'react';
 // 파일
 import * as _ from './style';
 
+
 interface TraitsInputLayoutProps {
   traits: string;
   onTraitsChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-  isEditing: boolean;
+  isEditing?: boolean;
 }
 
-const TraitsInputLayout = ({ traits, onTraitsChange, isEditing }: TraitsInputLayoutProps) => {
+const TraitsInputLayout = ({ traits, onTraitsChange, isEditing = true }: TraitsInputLayoutProps) => {
   const [inputValue, setInputValue] = useState(traits);
   const maxLength = 500;
 
