@@ -21,16 +21,16 @@ export const ProfileLayout_Container = styled.div`
 export const ProfileLayout_Image = styled.img`
   width: 100%;
   height: 100%;
-  border-radius: 50%;
+  border-radius: 2.3438rem;
   object-fit: cover;
   border: 1px solid ${theme.gray[100]};
 `;
 
-export const ProfileLayout_ProfileEdit = styled.div<{ show: boolean }>`
+export const ProfileLayout_ProfileEdit = styled.div<{ edit: boolean }>`
   position: absolute;
   bottom: -1px;
   right: -4px;
-  display: ${({ show }) => (show ? 'block' : 'none')};
+  display: ${({ edit }) => (edit ? 'block' : 'none')};
   cursor: pointer;
 `;
 

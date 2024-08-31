@@ -4,16 +4,16 @@ import Profile from 'assets/image/Profile.png';
 import ProfileEdit from 'assets/icon/ProfileEdit';
 
 interface ProfileLayoutProps {
-  show: boolean;
+  edit: boolean;
 }
 
-const ProfileLayout = ({ show }: ProfileLayoutProps) => {
+const ProfileLayout = ({ edit }: ProfileLayoutProps) => {
   const [image, setImage] = useState(Profile);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files[0]) {
-      const file = URL.createObjectURL(event.target.files[0]);
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      const file = URL.createObjectURL(e.target.files[0]);
       setImage(file);
     }
   };
@@ -28,7 +28,7 @@ const ProfileLayout = ({ show }: ProfileLayoutProps) => {
     <_.ProfileLayout_Layout>
       <_.ProfileLayout_Container>
         <_.ProfileLayout_Image src={image} />
-        <_.ProfileLayout_ProfileEdit show={show} onClick={handleIconClick}>
+        <_.ProfileLayout_ProfileEdit edit={edit} onClick={handleIconClick}>
           <ProfileEdit />
         </_.ProfileLayout_ProfileEdit>
         <_.ProfileLayout_ProfileInput
