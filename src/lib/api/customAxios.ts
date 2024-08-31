@@ -1,60 +1,81 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
 const AUTH_URL = process.env.REACT_APP_API;
 
-// export const AuthInstance = axios.create({
-//   baseURL: AUTH_URL,
-//   timeout: 10000
-// });
+interface AuthResponse {
+  status: number;
+  success: boolean;
+  message: string;
+  accessToken: string;
+  refreshToken: string;
+}
 
-// AuthInstance.interceptors.request.use(
-//   (config) => {
-//     const accessToken = localStorage.getItem('accessToken');
-//     const refreshToken = localStorage.getItem('refreshToken');
-//     if (accessToken) {
-//       config.headers.accessToken = accessToken;
-//     }
-//     if (refreshToken) {
-//       config.headers.refreshToken = refreshToken;
-//     }
-//     return config;
-//   },
-//   (error) => Promise.reject(error)
-// );
+export const AuthInstance = axios.create({
+  baseURL: AUTH_URL,
+  timeout: 10000
+});
 
-// AuthInstance.interceptors.response.use(
-//   (response) => response,
-//   async (error) => {
-//     if (axios.isAxiosError(error) && error.response) {
-//       const { status } = error.response.data;
-//       const refreshToken = localStorage.getItem('refreshToken');
+const refreshAccessToken = async (
+  refreshToken: string
+): Promise<AuthResponse | null> => {
+  const accessToken = localStorage.getItem('accessToken');
 
-//       if (status === 403) {
-//         if (refreshToken) {
-//           const { mutate: loginMutate } = useMutation(RefreshAccessToken, {
-//             onSuccess: (res) => {
-//               if (error.config) {
-//                 error.config.headers.accessToken = res.data.accessToken;
-//                 return axios.request(error.config);
-//               }
-//             },
-//             onError: () => {
-//               alert('로그인이 필요한 서비스입니다.');
-//             }
-//           });
+  try {
+    const response: AxiosResponse<AuthResponse> = await axios.post(
+      `${AUTH_URL}/jwt`,
+      {
+        refreshToken,
+        accessToken
+      }
+    );
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error('refresh 토큰 에러', error);
+    return null;
+  }
+};
 
-//           loginMutate();
-//         } else {
-//           throw error;
-//         }
-//       } else {
-//         throw error;
-//       }
-//     } else {
-//       throw error;
-//     }
-//   }
-// );
+// Request Interceptor
+AuthInstance.interceptors.request.use(
+  (config) => {
+    const accessToken = localStorage.getItem('accessToken');
+    if (accessToken) {
+      config.headers.accessToken = `${accessToken}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+
+// Response Interceptor
+AuthInstance.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    if (axios.isAxiosError(error) && error.response) {
+      const { status } = error.response;
+      const refreshToken = localStorage.getItem('refreshToken');
+
+      if (status === 403 && refreshToken) {
+        const newToken = await refreshAccessToken(refreshToken);
+        if (newToken && error.config) {
+          localStorage.setItem('accessToken', newToken.accessToken);
+
+          if (error.config.headers) {
+            error.config.headers.accessToken = `${newToken.accessToken}`;
+          }
+
+          return axios.request(error.config);
+        } else {
+          alert('로그인이 만료되었습니다. 다시 로그인해주세요.');
+          return Promise.reject(error);
+        }
+      }
+    }
+
+    return Promise.reject(error);
+  }
+);
 
 export const DefaultInstance = axios.create({
   baseURL: AUTH_URL,
