@@ -28,7 +28,7 @@ export const UserDetails_Name = styled.p`
 export const UserDetails_Box = styled.div`
   width: 100%;
   background-color: ${theme.gray[50]};
-  height: 75%;
+  height: 60%;
   display: flex;
   justify-content: center;
   align-items:flex-end;
