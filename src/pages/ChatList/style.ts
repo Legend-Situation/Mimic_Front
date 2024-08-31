@@ -1,13 +1,18 @@
 import { theme } from 'lib/utils/style/theme';
 import styled from 'styled-components';
 
-export const Main_Layout = styled.div`
+export const Main_Layout = styled.div<{ isLoading: boolean }>`
   display: flex;
   width: 100%;
-  height: calc(100vh - 40px);
+  height: 100vh;
+  padding-bottom: 40px;
+  ${({ isLoading }) =>
+    isLoading &&
+    `
+    justify-content: center; 
+    align-items: center;
+  `}
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
 `;
 
 export const Main_Nothing = styled.div`
@@ -40,6 +45,14 @@ export const Main_Chats = styled.div`
   display: flex;
   flex-direction: column;
   padding-bottom: 20px;
+`;
+
+export const Main_Loading_Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
 `;
 
 export const Main_Loading = styled.img`

@@ -51,13 +51,14 @@ const Main = () => {
   return (
     <>
       <ChatHeader />
-      <_.Main_Layout>
+      <_.Main_Layout isLoading={isLoading}>
         {isLoading ? (
-          <_.Main_Loading src={Loading} alt="로딩" />
+          <_.Main_Loading_Container>
+            <_.Main_Loading src={Loading} alt="로딩" />
+          </_.Main_Loading_Container>
         ) : chatList.length ? (
           <_.Main_Chats>
             {chatList.map((chat, index) => {
-              //마지막 대화 가져오기
               const lastMessage = chat.conversation.messages.slice(-1)[0];
 
               const lastContent =
