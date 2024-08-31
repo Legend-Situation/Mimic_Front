@@ -3,12 +3,6 @@ import { useRoutes } from 'react-router-dom';
 import Main from 'pages/Main';
 import Splash from 'pages/Splash';
 import Auth from 'pages/Auth';
-import Register from 'pages/Register';
-import Login from 'pages/Login';
-import Chatting from 'pages/Chatting';
-import AddPartner from 'pages/AddPartner';
-import UserDetails from 'pages/UserDetails';
-import UserProfile from 'pages/UserProfile'
 
 export default function Router() {
   return useRoutes([
@@ -17,15 +11,7 @@ export default function Router() {
       children: [
         { index: true, element: <Main /> },
         { path: '/splash', element: <Splash /> },
-        { path: '/auth', element: <Auth /> },
-        { path: '/register', element: <Register /> },
-        { path: '/login', element: <Login /> },
-        { path: '/chatList', element: <ChatList /> },
-        { path: '/chatting/:id', element: <Chatting /> },
-        { path: '/addPartner', element: <AddPartner /> },
-        { path: '/userdetails', element: <UserDetails /> },
-        { path: '/UserProfile', element: <UserProfile /> },
-
+        { path: '/auth', element: <Auth /> }
       ]
     }
     // { path: '*', element: <NotFound /> }
