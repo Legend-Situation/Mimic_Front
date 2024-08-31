@@ -4,9 +4,10 @@ interface OwnProps {
   color?: string;
   width?: string;
   height?: string;
+  onClick?: () => void;
 }
 
-const Plus = ({ color = "#1F1E23", width = "24", height = "24" }: OwnProps) => {
+const Plus = ({ color = "#1F1E23", width = "24", height = "24", onClick }: OwnProps) => {
   return (
     <svg
       width={width}
@@ -14,6 +15,8 @@ const Plus = ({ color = "#1F1E23", width = "24", height = "24" }: OwnProps) => {
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      onClick={onClick}
+      style={{ cursor: onClick ? 'pointer' : 'default' }} 
     >
       <g id="icon / ionicons / outline / add-outline">
         <g id="Vector">
