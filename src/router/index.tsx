@@ -5,7 +5,6 @@ import Splash from 'pages/Splash';
 import Auth from 'pages/Auth';
 import Register from 'pages/Register';
 import Login from 'pages/Login';
-import ChatList from 'pages/ChatList';
 import Chatting from 'pages/Chatting';
 import AddPartner from 'pages/AddPartner';
 import UserDetails from 'pages/UserDetails';
@@ -16,7 +15,7 @@ export default function Router() {
     {
       path: '/',
       children: [
-        { index: true, element: <ChatList /> },
+        { index: true, element: <Main /> },
         { path: '/splash', element: <Splash /> },
         { path: '/auth', element: <Auth /> },
         { path: '/register', element: <Register /> },
