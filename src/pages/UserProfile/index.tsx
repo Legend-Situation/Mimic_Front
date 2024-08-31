@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import * as _ from './style';
 import MainHeader from 'components/Headers/MainHeader';
 import ProfileLayout_Layout from 'components/common/ProfileLayout';
@@ -15,6 +16,8 @@ const UserProfile = () => {
     traits: '애는 내 남친이야 나랑 사귀어 잘생긴 훈남 st ㅋㅋ 공부도 잘 하고 나를 귀여밍이라고 불러줌',
   });
 
+  const navigate = useNavigate();
+
   const handleTraitsChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = e.target;
     setInputs({
@@ -25,6 +28,10 @@ const UserProfile = () => {
 
   const handleControlClick = () => {
     setIsEditing(!isEditing);
+  };
+
+  const handleChatExit = () => {
+    navigate('/chatList');
   };
 
   return (
@@ -68,6 +75,7 @@ const UserProfile = () => {
           backgroundColor="#ffffff"
           borderColor="#FF6B6B"
           textColor="#ff6b6b"
+          onClick={handleChatExit}
         />
       </_.UserProfile_Container>
     </_.UserProfile_Layout>
