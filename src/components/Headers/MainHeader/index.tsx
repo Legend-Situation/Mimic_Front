@@ -8,11 +8,11 @@ import { useNavigate } from 'react-router-dom';
 import Property from 'assets/icon/Property';
 
 interface MainHeaderProps {
-  title: string;
+  title?: string;
   propertyIcon?: boolean;
   control?: '편집' | '저장';
-  isEditing: boolean;
-  onControlClick: () => void;
+  isEditing?: boolean;
+  onControlClick?: () => void;
 }
 
 const MainHeader = ({

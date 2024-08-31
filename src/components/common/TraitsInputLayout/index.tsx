@@ -1,4 +1,7 @@
+// 라이브러리
 import React, { useState, useEffect } from 'react';
+
+// 파일
 import * as _ from './style';
 
 interface TraitsInputLayoutProps {

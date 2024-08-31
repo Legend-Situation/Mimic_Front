@@ -1,4 +1,7 @@
+// 라이브러리
 import React, { useState, useRef } from 'react';
+
+// 파일
 import * as _ from './style';
 import Profile from 'assets/image/Profile.png';
 import ProfileEdit from 'assets/icon/ProfileEdit';

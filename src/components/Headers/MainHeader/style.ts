@@ -3,7 +3,7 @@ import { theme } from 'lib/utils/style/theme';
 
 export const MainHeader_Container = styled.div<{ isOnChatting?: boolean }>`
   width: 100vw;
-  height: 40px;
+  height: 44px;
   display: flex;
   justify-content: space-between;
   padding: 0 30px;
