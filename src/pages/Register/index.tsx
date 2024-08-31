@@ -4,15 +4,12 @@ import MainHeader from 'components/Headers/MainHeader';
 import Logo from 'assets/icon/Logo';
 import InputLayout from 'components/common/InputLayout';
 import ButtonLayout from 'components/common/ButtonLayout';
-import { useMutation } from 'react-query';
-import { Auth_SignUp } from 'lib/api/Auth';
-import { useNavigate } from 'react-router-dom';
+
 const Register = () => {
-  const navigate = useNavigate();
   const welcome = '미믹에 오신 것을\n진심으로 환영합니다!';
   const [inputs, setInputs] = useState({
     name: '',
-    userid: '',
+    id: '',
     password: '',
     passwordCheck: ''
   });
@@ -26,32 +23,14 @@ const Register = () => {
   };
 
   const isFormValid = () => {
-    const { name, userid, password, passwordCheck } = inputs;
+    const { name, id, password, passwordCheck } = inputs;
     return (
       name == '' ||
-      userid == '' ||
+      id == '' ||
       password == '' ||
       passwordCheck == '' ||
       password !== passwordCheck
     );
-  };
-
-  const { mutate: SignUpMutate } = useMutation(Auth_SignUp, {
-    onSuccess: (res) => {
-      alert(res.message);
-      navigate('/login');
-    },
-    onError: (err: any) => {
-      alert(err.response.data?.message);
-    }
-  });
-
-  const onSubmit = () => {
-    SignUpMutate({
-      userid: inputs.userid,
-      password: inputs.password,
-      name: inputs.name
-    });
   };
 
   return (
@@ -74,8 +53,8 @@ const Register = () => {
             onChange={handleInputValue}
           />
           <InputLayout
-            value={inputs.userid}
-            name="userid"
+            value={inputs.id}
+            name="id"
             title="아이디"
             placeholder="아이디를 입력해주세요"
             onChange={handleInputValue}
@@ -100,7 +79,9 @@ const Register = () => {
         <_.Register_Button>
           <ButtonLayout
             value="회원가입"
-            onClick={onSubmit}
+            onClick={() => {
+              return;
+            }}
             width="100%"
             state={!isFormValid()}
           />

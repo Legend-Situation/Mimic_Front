@@ -6,7 +6,7 @@ interface ChatProps {
   image: string;
   name: string;
   content: string;
-  time?: string;
+  time: string;
 }
 
 const Chat = ({ image, name, content, time }: ChatProps) => {
@@ -17,7 +17,7 @@ const Chat = ({ image, name, content, time }: ChatProps) => {
         <_.Chat_Name>{name}</_.Chat_Name>
         <_.Chat_Content>{content}</_.Chat_Content>
       </_.Chat_Detail>
-      {/* <_.Chat_Time>{time}</_.Chat_Time> */}
+      <_.Chat_Time>{time}</_.Chat_Time>
       <_.Chat_Count>N</_.Chat_Count>
     </_.Chat_Layout>
   );

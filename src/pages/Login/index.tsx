@@ -4,15 +4,11 @@ import MainHeader from 'components/Headers/MainHeader';
 import Logo from 'assets/icon/Logo';
 import InputLayout from 'components/common/InputLayout';
 import ButtonLayout from 'components/common/ButtonLayout';
-import { useMutation } from 'react-query';
-import { Auth_Login } from 'lib/api/Auth';
-import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-  const navigate = useNavigate();
   const welcome = '미-믹\n돌아오신 것을 환영합니다';
   const [inputs, setInputs] = useState({
-    userid: '',
+    id: '',
     password: ''
   });
 
@@ -25,30 +21,13 @@ const Login = () => {
   };
 
   const isFormValid = () => {
-    const { userid, password } = inputs;
-    return userid == '' || password == '';
-  };
-
-  const { mutate: LoginMutate } = useMutation(Auth_Login, {
-    onSuccess: (res) => {
-      console.log(res);
-      localStorage.setItem('accessToken', res.accessToken);
-      localStorage.setItem('refreshToken', res.refreshToken);
-      alert(res.message);
-      navigate('/');
-    },
-    onError: (err: any) => {
-      alert(err.response.data?.message);
-    }
-  });
-
-  const onSubmit = () => {
-    LoginMutate({ userid: inputs.userid, password: inputs.password });
+    const { id, password } = inputs;
+    return id == '' || password == '';
   };
 
   return (
     <>
-      <MainHeader title="로그인" />
+      <MainHeader title="회원가입" />
       <_.Login_Layout>
         <_.Login_Header>
           <Logo />
@@ -57,8 +36,8 @@ const Login = () => {
         </_.Login_Header>
         <_.Login_Inputs>
           <InputLayout
-            value={inputs.userid}
-            name="userid"
+            value={inputs.id}
+            name="id"
             title="아이디"
             placeholder="아이디를 입력해주세요"
             onChange={handleInputValue}
@@ -73,13 +52,25 @@ const Login = () => {
           />
         </_.Login_Inputs>
         <_.Login_HelperList>
-          <_.Login_Helper>비밀번호찾기</_.Login_Helper>
-          <_.Login_Helper>|</_.Login_Helper>
-          <_.Login_Helper>아이디찾기</_.Login_Helper>
+          <_.Login_Helper
+            onClick={() => {
+              return;
+            }}
+          >
+            비밀번호찾기
+          </_.Login_Helper>
           <_.Login_Helper>|</_.Login_Helper>
           <_.Login_Helper
             onClick={() => {
-              navigate('/register');
+              return;
+            }}
+          >
+            아이디찾기
+          </_.Login_Helper>
+          <_.Login_Helper>|</_.Login_Helper>
+          <_.Login_Helper
+            onClick={() => {
+              return;
             }}
           >
             회원가입
@@ -88,7 +79,9 @@ const Login = () => {
         <_.Login_Button>
           <ButtonLayout
             value="로그인"
-            onClick={onSubmit}
+            onClick={() => {
+              return;
+            }}
             width="100%"
             state={!isFormValid()}
           />
