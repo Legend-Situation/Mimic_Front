@@ -69,6 +69,7 @@ const Main = () => {
               return (
                 <Chat
                   key={`${chat.chatid}-${index}`}
+                  chatid={chat.chatid}
                   image={chat.profileImg}
                   name={chat.name}
                   content={lastContent}
