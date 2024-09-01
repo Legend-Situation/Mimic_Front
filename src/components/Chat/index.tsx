@@ -1,6 +1,5 @@
 import React from 'react';
 import * as _ from './style';
-import Profile from 'assets/image/Profile.png';
 
 interface ChatProps {
   image: string;
@@ -12,7 +11,7 @@ interface ChatProps {
 const Chat = ({ image, name, content, time }: ChatProps) => {
   return (
     <_.Chat_Layout>
-      <_.Chat_Image src={Profile} />
+      <_.Chat_Image src={image} />
       <_.Chat_Detail>
         <_.Chat_Name>{name}</_.Chat_Name>
         <_.Chat_Content>{content}</_.Chat_Content>
