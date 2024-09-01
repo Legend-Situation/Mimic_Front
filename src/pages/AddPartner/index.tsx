@@ -16,6 +16,15 @@ const AddPartner = () => {
   const navigate = useNavigate();
   const [state, dispatch] = useReducer(reducer, initialState);
   const [imageUrl, setImageUrl] = useState<string>('');
+  const [data, setData] = useState({
+    FileURL: '',
+    Contents: [
+      {
+        user1: '',
+        user2: ''
+      }
+    ]
+  });
 
   const handleInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -58,7 +67,7 @@ const AddPartner = () => {
   const onSubmit = () => {
     Chat_Create({
       name: state.name,
-      profileImg: state.profileImg,
+      profileImg: imageUrl,
       info: state.info,
       chatUrl: state.chatUrl,
       previousConversationTarget: state.previousConversationTarget,
@@ -127,6 +136,8 @@ const AddPartner = () => {
             setSelectedPerson={(person) =>
               dispatch({ type: 'SET_SELECTED_PERSON', payload: person })
             }
+            data={data}
+            setData={setData}
           />
         </_.AddPartner_Box>
         <ButtonLayout value="완료" width="100%" state={isButtonActive} />
