@@ -6,7 +6,7 @@ import ProfileLayout_Layout from 'components/common/ProfileLayout';
 import LineInputLayout from 'components/common/LineInputLayout';
 import ChatUpload from 'components/common/ChatUpload';
 import ButtonLayout from 'components/common/ButtonLayout';
-import TraitsInputLayout from 'components/common/TraitsInputLayout';
+import TraitsInputLayout from 'components/common/InfoInputLayout';
 
 const UserProfile = () => {
   const [isEditing, setIsEditing] = useState(false);

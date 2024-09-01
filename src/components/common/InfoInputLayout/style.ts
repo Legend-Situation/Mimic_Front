@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import { theme } from 'lib/utils/style/theme';
 
-export const TraitsInputLayout_Container = styled.div`
+export const InfoInputLayout_Container = styled.div`
   width: 100%;
 `;
 
-export const TraitsInputLayout_TraitsInput = styled.textarea<{
+export const InfoInputLayout_Input = styled.textarea<{
   isEditing: boolean;
 }>`
   background-color: #fff;
@@ -34,7 +34,7 @@ export const TraitsInputLayout_TraitsInput = styled.textarea<{
   }
 `;
 
-export const TraitsInputLayout_CharCount = styled.div`
+export const InfoInputLayout_CharCount = styled.div`
   text-align: right;
   color: ${theme.gray[200]};
   font-size: 13px;

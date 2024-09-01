@@ -3,15 +3,15 @@ import React, { useState, useRef } from 'react';
 
 // 파일
 import * as _ from './style';
-import Profile from 'assets/image/Profile.png';
 import ProfileEdit from 'assets/icon/ProfileEdit';
 
 interface ProfileLayoutProps {
   edit: boolean;
+  image: string;
+  setImage: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const ProfileLayout = ({ edit }: ProfileLayoutProps) => {
-  const [image, setImage] = useState(Profile);
+const ProfileLayout = ({ edit, image, setImage }: ProfileLayoutProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {

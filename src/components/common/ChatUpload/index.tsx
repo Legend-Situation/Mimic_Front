@@ -1,14 +1,24 @@
-import React, { useRef, useState, ChangeEvent } from 'react';
+import React, { useRef, ChangeEvent } from 'react';
 import * as _ from './style';
 import Plus from 'assets/icon/Plus';
 import Delete from 'assets/icon/Delete';
 import Refresh from 'assets/icon/Refresh';
 import Down from 'assets/icon/Down';
 
-function ChatUpload() {
-  const [isUploaded, setIsUploaded] = useState(false);
+interface ChatUploadProps {
+  isUploaded: boolean;
+  setIsUploaded: (isUploaded: boolean) => void;
+  selectedPerson: string;
+  setSelectedPerson: (person: string) => void;
+}
+
+function ChatUpload({
+  isUploaded,
+  setIsUploaded,
+  selectedPerson,
+  setSelectedPerson
+}: ChatUploadProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [selectedPerson, setSelectedPerson] = useState<string>('');
 
   const handleButtonClick = () => {
     if (fileInputRef.current) {
@@ -61,7 +71,10 @@ function ChatUpload() {
             </_.ChatUpload_Description>
           </_.ChatUpload_TextContainer>
           <_.ChatUpload_ButtonContainer>
-            <_.ChatUpload_Button isUploaded={isUploaded} onClick={handleButtonClick}>
+            <_.ChatUpload_Button
+              isUploaded={isUploaded}
+              onClick={handleButtonClick}
+            >
               {isUploaded ? (
                 <>
                   <Refresh />
@@ -79,7 +92,8 @@ function ChatUpload() {
 
         {!isUploaded && (
           <_.ChatUpload_Info>
-            카카오톡 대화방 → 설정 → 대화 내용 내보내기 → 모든 텍스트 내부 저장소에 저장 → txt 파일 업로드 (1:1 채팅만 가능)
+            카카오톡 대화방 → 설정 → 대화 내용 내보내기 → 모든 텍스트 내부
+            저장소에 저장 → txt 파일 업로드 (1:1 채팅만 가능)
           </_.ChatUpload_Info>
         )}
 
@@ -112,7 +126,6 @@ function ChatUpload() {
         ref={fileInputRef}
         onChange={handleFileChange}
       />
-
     </>
   );
 }
