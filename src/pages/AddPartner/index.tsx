@@ -8,10 +8,14 @@ import ChatUpload from 'components/common/ChatUpload';
 import ButtonLayout from 'components/common/ButtonLayout';
 import InfoInputLayout from 'components/common/InfoInputLayout';
 import { reducer, initialState, State } from 'lib/utils/AddPartnerReducer';
+import { useMutation } from 'react-query';
+import { Chat_Create } from 'lib/api/Chat';
+import { useNavigate } from 'react-router-dom';
 
 const AddPartner = () => {
+  const navigate = useNavigate();
   const [state, dispatch] = useReducer(reducer, initialState);
-  const [profileImg, setProfileImg] = useState<string>(initialState.profileImg);
+  const [imageUrl, setImageUrl] = useState<string>('');
 
   const handleInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -37,8 +41,31 @@ const AddPartner = () => {
     state.age !== '' &&
     state.gender !== '' &&
     state.info !== '' &&
-    state.chatUrl !== '' &&
     state.previousConversationTarget !== '';
+
+  const { mutate: CreateMutate } = useMutation(Chat_Create, {
+    onSuccess: (res) => {
+      localStorage.setItem('accessToken', res.accessToken);
+      localStorage.setItem('refreshToken', res.refreshToken);
+      alert(res.message);
+      navigate('/');
+    },
+    onError: (err: any) => {
+      alert(err.response.data?.message);
+    }
+  });
+
+  const onSubmit = () => {
+    Chat_Create({
+      name: state.name,
+      profileImg: state.profileImg,
+      info: state.info,
+      chatUrl: state.chatUrl,
+      previousConversationTarget: state.previousConversationTarget,
+      age: state.age,
+      gender: state.gender
+    });
+  };
 
   return (
     <>
@@ -47,8 +74,8 @@ const AddPartner = () => {
         <_.AddPartner_sectionGap>
           <ProfileLayout
             edit={true}
-            image={profileImg}
-            setImage={setProfileImg}
+            profileImage={initialState.profileImg}
+            setImageUrl={setImageUrl}
           />
           <InputLayout
             value={state.name}
@@ -69,13 +96,13 @@ const AddPartner = () => {
             <_.AddPartner_GenderGroup>
               <GenderButton
                 value="여자"
-                state={state.gender === 'female'}
-                onClick={() => handleGenderSelect('female')}
+                state={state.gender === 'woman'}
+                onClick={() => handleGenderSelect('woman')}
               />
               <GenderButton
                 value="남자"
-                state={state.gender === 'male'}
-                onClick={() => handleGenderSelect('male')}
+                state={state.gender === 'man'}
+                onClick={() => handleGenderSelect('man')}
               />
             </_.AddPartner_GenderGroup>
           </_.AddPartner_Box>

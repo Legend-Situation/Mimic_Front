@@ -29,8 +29,18 @@ function ChatUpload({
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      console.log('파일 선택됨:', file.name);
-      setIsUploaded(true);
+      const fileExtension = file.name.split('.').pop()?.toLowerCase();
+      if (fileExtension === 'csv') {
+        console.log('CSV 파일 선택됨:', file.name);
+        setIsUploaded(true);
+        
+      } else {
+        alert('CSV 파일만 업로드할 수 있습니다.');
+        setIsUploaded(false);
+        if (fileInputRef.current) {
+          fileInputRef.current.value = '';
+        }
+      }
     }
   };
 
@@ -93,7 +103,7 @@ function ChatUpload({
         {!isUploaded && (
           <_.ChatUpload_Info>
             카카오톡 대화방 → 설정 → 대화 내용 내보내기 → 모든 텍스트 내부
-            저장소에 저장 → txt 파일 업로드 (1:1 채팅만 가능)
+            저장소에 저장 → csv 파일 업로드 (1:1 채팅만 가능)
           </_.ChatUpload_Info>
         )}
 
