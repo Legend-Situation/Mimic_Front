@@ -48,6 +48,8 @@ const Main = () => {
     }
   }, [newChatList]);
 
+  const reverseChatList = [...chatList].reverse();
+
   return (
     <>
       <ChatHeader />
@@ -58,8 +60,8 @@ const Main = () => {
           </_.Main_Loading_Container>
         ) : chatList.length ? (
           <_.Main_Chats>
-            {chatList.map((chat, index) => {
-              const lastMessage = chat.conversation.messages.slice(-1)[0];
+            {reverseChatList.map((chat, index) => {
+              const lastMessage = chat.conversation?.messages?.slice(-1)[0];
 
               const lastContent =
                 lastMessage?.content?.[0]?.text || '메시지 없음';
