@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import * as _ from './style';
 import MainHeader from 'components/Headers/MainHeader';
 import ProfileLayout from 'components/common/ProfileLayout';
@@ -11,7 +11,6 @@ import { reducer, initialState, State } from 'lib/utils/AddPartnerReducer';
 import { useMutation } from 'react-query';
 import { Chat_Create } from 'lib/api/Chat';
 import { useNavigate } from 'react-router-dom';
-
 const AddPartner = () => {
   const navigate = useNavigate();
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -45,32 +44,29 @@ const AddPartner = () => {
     dispatch({ type: 'SET_GENDER', payload: gender });
   };
 
-  const isButtonActive =
-    state.name !== '' &&
-    state.age !== '' &&
-    state.gender !== '' &&
-    state.info !== '' &&
-    state.previousConversationTarget !== '';
+  const isFormValid = () => {
+    const { name, info, age, gender } = state;
+    return name == '' || info == '' || age == '' || gender == '';
+  };
 
   const { mutate: CreateMutate } = useMutation(Chat_Create, {
     onSuccess: (res) => {
-      localStorage.setItem('accessToken', res.accessToken);
-      localStorage.setItem('refreshToken', res.refreshToken);
       alert(res.message);
       navigate('/');
     },
     onError: (err: any) => {
-      alert(err.response.data?.message);
+      console.log(err);
     }
   });
 
   const onSubmit = () => {
-    Chat_Create({
+    console.log('Profile Image URL:', imageUrl);
+    CreateMutate({
       name: state.name,
       profileImg: imageUrl,
       info: state.info,
-      chatUrl: state.chatUrl,
-      previousConversationTarget: state.previousConversationTarget,
+      chatUrl: data.FileURL,
+      previousConversationTarget: state.selectedPerson,
       age: state.age,
       gender: state.gender
     });
@@ -140,7 +136,12 @@ const AddPartner = () => {
             setData={setData}
           />
         </_.AddPartner_Box>
-        <ButtonLayout value="완료" width="100%" state={isButtonActive} />
+        <ButtonLayout
+          value="완료"
+          width="100%"
+          state={!isFormValid()}
+          onClick={onSubmit}
+        />
       </_.AddPartner_Layout>
     </>
   );

@@ -5,7 +5,6 @@ export interface State {
   profileImg: string;
   info: string;
   chatUrl: string;
-  previousConversationTarget: string;
   age: string;
   gender: string;
   isUploaded: boolean;
@@ -24,7 +23,6 @@ export const initialState: State = {
   profileImg: Profile,
   info: '',
   chatUrl: '',
-  previousConversationTarget: '',
   age: '',
   gender: '',
   isUploaded: false,

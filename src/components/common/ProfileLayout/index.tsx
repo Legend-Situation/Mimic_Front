@@ -34,7 +34,7 @@ const ProfileLayout = ({
 
   const { mutate: ImageUpload } = useMutation(Upload_Image, {
     onSuccess: (res) => {
-      setImageUrl(res.url);
+      setImageUrl(res.data.url);
     },
     onError: (err: any) => {
       if (err.status === 413) {

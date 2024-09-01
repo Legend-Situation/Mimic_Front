@@ -69,7 +69,8 @@ function ChatUpload({
   };
 
   const handleSelectChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setSelectedPerson(e.target.value);
+    const selectedName = e.target.value;
+    setSelectedPerson(selectedName);
   };
 
   return (
