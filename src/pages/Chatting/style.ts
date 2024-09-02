@@ -66,7 +66,7 @@ export const Chatting_Textarea = styled.textarea`
   overflow-y: auto;
 `;
 
-export const Chatting_SendIcon = styled.div`
+export const Chatting_SendIcon = styled.div<{ disabled?: boolean }>`
   display: flex;
   align-items: center;
 `;

@@ -24,3 +24,15 @@ export const Chat_Log = async (chatid: string) => {
   const { data } = await AuthInstance.get(`/chat/chatting/${chatid}`);
   return data;
 };
+
+interface SendParams {
+  chatid: string;
+  previousConversation: string;
+}
+
+export const Chat_Send = async (params: SendParams) => {
+  const { data } = await AuthInstance.post(`/chat/chatting/${params.chatid}`, {
+    previousConversation: params.previousConversation
+  });
+  return data;
+};
