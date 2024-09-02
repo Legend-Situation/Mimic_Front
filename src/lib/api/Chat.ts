@@ -19,3 +19,8 @@ export const Chat_Create = async (params: CreateParams) => {
   const { data } = await AuthInstance.post(`/chat`, params);
   return data;
 };
+
+export const Chat_Histories = async (params: any) => {
+  const { data } = await AuthInstance.post(`/`, params);
+  return data;
+};

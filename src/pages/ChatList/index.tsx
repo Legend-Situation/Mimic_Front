@@ -38,7 +38,6 @@ const Main = () => {
     },
     onSuccess: (data) => {
       setChatList(data.data);
-      console.log(data);
     }
   });
 
