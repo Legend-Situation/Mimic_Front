@@ -1,6 +1,7 @@
 interface Message {
   role: string;
   content: string;
+  refusal?: string | null | undefined;
 }
 
 interface Conversation {
@@ -17,7 +18,7 @@ interface Conversation {
 }
 
 interface ChatData {
-  chatid: number;
+  chatid: string;
   name: string;
   profileImg: string;
   info: string;

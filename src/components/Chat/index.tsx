@@ -23,6 +23,7 @@ const Chat = ({ image, name, content, time, chatid }: ChatProps) => {
         <_.Chat_Count>N</_.Chat_Count>
       </_.Chat_Layout>
     </_.Chat_Link>
+  );
 };
 
 export default Chat;
