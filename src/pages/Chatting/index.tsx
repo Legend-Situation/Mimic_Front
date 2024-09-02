@@ -4,13 +4,17 @@ import Message from 'components/Message';
 import * as _ from './style';
 import Send from 'assets/icon/Send';
 import { theme } from 'lib/utils/style/theme';
-import chatLog from 'data/chatLog';
+import { useQuery } from 'react-query';
+import { Chat_Log } from 'lib/api/Chat';
+import { ChatLog } from 'types/chatLog';
+import { useParams } from 'react-router-dom';
 
 const Chatting = () => {
   const [message, setMessage] = useState<string>('');
-  const [isLoading, setIsLoading] = useState<boolean>(false);
   const messageEndRef = useRef<HTMLDivElement | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+  const [chatLog, setChatLog] = useState<ChatLog>();
+  const params = useParams().id;
 
   const handleSendMessage = () => {
     if (message.trim() !== '') {
@@ -32,26 +36,66 @@ const Chatting = () => {
     }
   };
 
+  const { isLoading, data: newChatLog } = useQuery(
+    'getChatLog',
+    async () => {
+      if (params) {
+        return await Chat_Log(params);
+      }
+    },
+    {
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
+      retry: 0,
+      onError: (err: any) => {
+        console.log(err);
+      },
+      onSuccess: (res) => {
+        setChatLog((prev) => ({
+          ...prev,
+          ...res
+        }));
+      }
+    }
+  );
+
   useEffect(() => {
     if (messageEndRef.current) {
-      messageEndRef.current.scrollIntoView({ behavior: 'smooth' });
+      messageEndRef.current.scrollIntoView({ behavior: 'auto' });
     }
   }, []);
 
-  const chatHistories = chatLog.data.conversation.messages;
+  useEffect(() => {
+    if (newChatLog && messageEndRef.current) {
+      messageEndRef.current.scrollIntoView({ behavior: 'auto' });
+    }
+  }, [newChatLog]);
+
+  const chatHistories = chatLog?.data?.conversation?.messages || [];
 
   return (
     <_.Chatting_Layout>
-      <MainHeader title="사용자이름" propertyIcon={true} />
+      <MainHeader title={chatLog?.data?.name} propertyIcon={true} />
       <_.Chatting_Messages>
-        {chatHistories.map((item: any, index: any) => (
-          <Message
-            key={index}
-            message={item.content}
-            role={item.role}
-            isLoading={isLoading}
-          />
-        ))}
+        {chatHistories
+          ?.filter((item: any) => item.role !== 'system')
+          .map((item: any, index: number) => {
+            const messageText = item.content
+              .map((contentItem: any) => contentItem.text)
+              .join(' ');
+            const messageRole = item.role;
+
+            return (
+              <Message
+                key={index}
+                name={chatLog?.data?.name ?? 'Unknown'}
+                message={messageText}
+                role={messageRole}
+                isLoading={isLoading}
+              />
+            );
+          })}
+        <div ref={messageEndRef} />
       </_.Chatting_Messages>
       <_.Chatting_Typing_Container>
         <_.Chatting_Typing_Box>

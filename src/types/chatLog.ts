@@ -17,7 +17,7 @@ interface Conversation {
 }
 
 interface ChatData {
-  chatid: number;
+  chatid: string;
   name: string;
   profileImg: string;
   info: string;

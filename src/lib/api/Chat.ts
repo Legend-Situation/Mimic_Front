@@ -20,9 +20,7 @@ export const Chat_Create = async (params: CreateParams) => {
   return data;
 };
 
-export const Chat_History = async (params: any) => {
-  const { data } = await AuthInstance.post(`/`, params);
+export const Chat_Log = async (chatid: string) => {
+  const { data } = await AuthInstance.get(`/chat/chatting/${chatid}`);
   return data;
 };
-ㄴ
-      const file = e.target.files[0];
