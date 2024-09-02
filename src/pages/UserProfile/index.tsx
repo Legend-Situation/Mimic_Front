@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as _ from './style';
 import MainHeader from 'components/Headers/MainHeader';
-import ProfileLayout_Layout from 'components/common/ProfileLayout';
+import ProfileLayout from 'components/common/ProfileLayout';
 import LineInputLayout from 'components/common/LineInputLayout';
 import ChatUpload from 'components/common/ChatUpload';
 import ButtonLayout from 'components/common/ButtonLayout';
@@ -44,7 +44,7 @@ const UserProfile = () => {
         onControlClick={handleControlClick}
       />
       <_.UserProfile_Container>
-        <ProfileLayout_Layout edit={isEditing} />
+        <ProfileLayout edit={isEditing} />
         <LineInputLayout
           label="이름"
           placeholder="사용자이름"

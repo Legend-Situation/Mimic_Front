@@ -35,3 +35,4 @@ export const UserDetails_Box = styled.div`
   padding: 20px;
   box-sizing: border-box;
 `;
+

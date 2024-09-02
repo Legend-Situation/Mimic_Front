@@ -24,3 +24,19 @@ export const MyPage_Name = styled.p`
   margin: 15px 0;
   color: ${theme.gray.black};
 `;
+
+export const MyPage_IdBox = styled.div`
+  width: 100%;
+  height: 52px;
+  color: ${theme.gray[400]};
+  font-size: 16px;
+  font-weight: 400;
+  padding: 16px;
+  background-color: ${theme.gray[50]};
+  justify-content: center;
+  border-radius: 8px;
+  margin-top: 20px;
+`;
+export const MyPage_Button = styled.div`
+  padding: 20px;
+`;
