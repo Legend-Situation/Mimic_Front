@@ -38,7 +38,6 @@ const Main = () => {
     },
     onSuccess: (data) => {
       setChatList(data.data);
-      console.log(data);
     }
   });
 
@@ -48,17 +47,20 @@ const Main = () => {
     }
   }, [newChatList]);
 
+  const reverseChatList = [...chatList].reverse();
+
   return (
     <>
       <ChatHeader />
-      <_.Main_Layout>
+      <_.Main_Layout isLoading={isLoading}>
         {isLoading ? (
-          <_.Main_Loading src={Loading} alt="로딩" />
+          <_.Main_Loading_Container>
+            <_.Main_Loading src={Loading} alt="로딩" />
+          </_.Main_Loading_Container>
         ) : chatList.length ? (
           <_.Main_Chats>
-            {chatList.map((chat, index) => {
-              //마지막 대화 가져오기
-              const lastMessage = chat.conversation.messages.slice(-1)[0];
+            {reverseChatList.map((chat, index) => {
+              const lastMessage = chat.conversation?.messages?.slice(-1)[0];
 
               const lastContent =
                 lastMessage?.content?.[0]?.text || '메시지 없음';
@@ -66,6 +68,7 @@ const Main = () => {
               return (
                 <Chat
                   key={`${chat.chatid}-${index}`}
+                  chatid={chat.chatid}
                   image={chat.profileImg}
                   name={chat.name}
                   content={lastContent}
