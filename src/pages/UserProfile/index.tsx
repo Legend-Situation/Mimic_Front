@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useReducer, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as _ from './style';
 import MainHeader from 'components/Headers/MainHeader';
@@ -7,23 +7,36 @@ import LineInputLayout from 'components/common/LineInputLayout';
 import ChatUpload from 'components/common/ChatUpload';
 import ButtonLayout from 'components/common/ButtonLayout';
 import TraitsInputLayout from 'components/common/InfoInputLayout';
+import { initialState, reducer, State } from 'lib/utils/AddPartnerReducer';
 
 const UserProfile = () => {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const [imageUrl, setImageUrl] = useState<string>('');
   const [isEditing, setIsEditing] = useState(false);
-  const [name, setName] = useState('사용자이름');
-  const [age, setAge] = useState('18');
-  const [inputs, setInputs] = useState({
-    traits:
-      '애는 내 남친이야 나랑 사귀어 잘생긴 훈남 st ㅋㅋ 공부도 잘 하고 나를 귀여밍이라고 불러줌'
+  const [data, setData] = useState({
+    FileURL: '',
+    Contents: [
+      {
+        user1: '',
+        user2: ''
+      }
+    ]
   });
 
   const navigate = useNavigate();
 
+  const handleInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    dispatch({
+      type: 'SET_INPUT_VALUE',
+      payload: { name: name as keyof State, value }
+    });
+  };
+
   const handleTraitsChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const { value } = e.target;
-    setInputs({
-      ...inputs,
-      traits: value
+    dispatch({
+      type: 'SET_INPUT_VALUE',
+      payload: { name: 'info', value: e.target.value }
     });
   };
 
@@ -45,30 +58,45 @@ const UserProfile = () => {
         onControlClick={handleControlClick}
       />
       <_.UserProfile_Layout>
-        <ProfileLayout_Layout edit={isEditing} />
+        <ProfileLayout
+          edit={isEditing}
+          profileImage={state.profileImg}
+          setImageUrl={setImageUrl}
+        />
         <LineInputLayout
           label="이름"
           placeholder="사용자이름"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          value={state.name}
+          onChange={handleInputValue}
           isEditing={isEditing}
         />
         <LineInputLayout
           label="나이"
           placeholder="18"
-          value={age}
-          onChange={(e) => setAge(e.target.value)}
+          value={state.age}
+          onChange={handleInputValue}
           isEditing={isEditing}
         />
         <_.UserProfile_TextAreaBox>
           <_.UserProfile_Label>특징</_.UserProfile_Label>
           <TraitsInputLayout
-            traits={inputs.traits}
-            onTraitsChange={handleTraitsChange}
+            info={state.info}
+            onInfoChange={handleTraitsChange}
             isEditing={isEditing}
           />
         </_.UserProfile_TextAreaBox>
-        <ChatUpload />
+        <ChatUpload
+          isUploaded={state.isUploaded}
+          setIsUploaded={(isUploaded) =>
+            dispatch({ type: 'SET_IS_UPLOADED', payload: isUploaded })
+          }
+          selectedPerson={state.selectedPerson}
+          setSelectedPerson={(person) =>
+            dispatch({ type: 'SET_SELECTED_PERSON', payload: person })
+          }
+          data={data}
+          setData={setData}
+        />
         <ButtonLayout
           value="채팅방 나가기"
           state={true}
