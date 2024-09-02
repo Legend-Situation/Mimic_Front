@@ -24,3 +24,5 @@ export const Chat_History = async (params: any) => {
   const { data } = await AuthInstance.post(`/`, params);
   return data;
 };
+ㄴ
+      const file = e.target.files[0];

@@ -1,5 +1,6 @@
 import React from 'react';
 import * as _ from './style';
+import Profile from 'assets/image/Profile.png';
 
 interface ChatProps {
   image: string;
@@ -22,7 +23,6 @@ const Chat = ({ image, name, content, time, chatid }: ChatProps) => {
         <_.Chat_Count>N</_.Chat_Count>
       </_.Chat_Layout>
     </_.Chat_Link>
-  );
 };
 
 export default Chat;

@@ -13,7 +13,6 @@ export const Chat_Layout = styled.div`
   gap: 12px;
   position: relative;
   align-items: center;
-  text-decoration: none;
 `;
 
 export const Chat_Image = styled.img`
