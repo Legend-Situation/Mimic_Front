@@ -8,6 +8,7 @@ import { useQuery } from 'react-query';
 import { Chat_List } from 'lib/api/Chat';
 import Loading from 'assets/image/Loading.gif';
 import { useNavigate } from 'react-router-dom';
+import Profile from 'assets/image/Profile.png';
 
 type ChatItem = {
   chatid: string;
@@ -69,7 +70,7 @@ const Main = () => {
                 <Chat
                   key={`${chat.chatid}-${index}`}
                   chatid={chat.chatid}
-                  image={chat.profileImg}
+                  image={chat.profileImg || Profile}
                   name={chat.name}
                   content={lastContent}
                 />

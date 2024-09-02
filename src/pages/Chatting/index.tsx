@@ -7,6 +7,7 @@ import { theme } from 'lib/utils/style/theme';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { Chat_Log, Chat_Send } from 'lib/api/Chat';
 import { ChatLog } from 'types/chatLog';
+import Profile from 'assets/image/Profile.png';
 import { useParams } from 'react-router-dom';
 
 const Chatting = () => {
@@ -141,6 +142,7 @@ const Chatting = () => {
             return (
               <Message
                 key={index}
+                profileImg={chatLog?.data?.profileImg || Profile}
                 name={chatLog?.data?.name ?? '사용자'}
                 message={messageText}
                 role={item.role}
@@ -150,14 +152,21 @@ const Chatting = () => {
           })}
         {pendingMessage && (
           <Message
-            name="사용자"
+            profileImg={chatLog?.data?.profileImg || Profile}
+            name={chatLog?.data?.name ?? '사용자'}
             message={pendingMessage.content[0].text}
             role={pendingMessage.role}
             isLoading={false}
           />
         )}
         {isWaitingForReply && (
-          <Message name="상대방" message="" role="assistant" isLoading={true} />
+          <Message
+            profileImg={chatLog?.data?.profileImg || Profile}
+            name={chatLog?.data?.name ?? '사용자'}
+            message=""
+            role="assistant"
+            isLoading={true}
+          />
         )}
         <div ref={messageEndRef} />
       </_.Chatting_Messages>
