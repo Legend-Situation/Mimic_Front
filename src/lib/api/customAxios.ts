@@ -12,7 +12,10 @@ interface AuthResponse {
 
 export const AuthInstance = axios.create({
   baseURL: AUTH_URL,
-  timeout: 10000
+  timeout: 10000,
+  headers: {
+    referrerPolicy: 'no-referrer'
+  }
 });
 
 const refreshAccessToken = async (
@@ -26,6 +29,11 @@ const refreshAccessToken = async (
       {
         refreshToken,
         accessToken
+      },
+      {
+        headers: {
+          referrerPolicy: 'no-referrer'
+        }
       }
     );
     console.log(response.data);
@@ -36,7 +44,6 @@ const refreshAccessToken = async (
   }
 };
 
-// Request Interceptor
 AuthInstance.interceptors.request.use(
   (config) => {
     const accessToken = localStorage.getItem('accessToken');
@@ -48,7 +55,6 @@ AuthInstance.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// Response Interceptor
 AuthInstance.interceptors.response.use(
   (response) => response,
   async (error) => {
@@ -79,5 +85,8 @@ AuthInstance.interceptors.response.use(
 
 export const DefaultInstance = axios.create({
   baseURL: AUTH_URL,
-  timeout: 10000
+  timeout: 10000,
+  headers: {
+    referrerPolicy: 'no-referrer'
+  }
 });

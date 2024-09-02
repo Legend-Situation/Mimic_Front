@@ -1,5 +1,10 @@
 import { theme } from 'lib/utils/style/theme';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+
+export const Chat_Link = styled(Link)`
+  text-decoration: none;
+`;
 
 export const Chat_Layout = styled.div`
   width: 100%;

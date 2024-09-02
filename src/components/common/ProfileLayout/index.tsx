@@ -1,25 +1,47 @@
-// 라이브러리
 import React, { useState, useRef } from 'react';
-
-// 파일
 import * as _ from './style';
-import Profile from 'assets/image/Profile.png';
 import ProfileEdit from 'assets/icon/ProfileEdit';
+import { useMutation } from 'react-query';
+import { Upload_Image } from 'lib/api/Upload';
 
 interface ProfileLayoutProps {
   edit: boolean;
+  profileImage: string;
+  setImageUrl: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const ProfileLayout = ({ edit }: ProfileLayoutProps) => {
-  const [image, setImage] = useState(Profile);
+const ProfileLayout = ({
+  edit,
+  profileImage,
+  setImageUrl
+}: ProfileLayoutProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [image, setImage] = useState(profileImage);
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
-      const file = URL.createObjectURL(e.target.files[0]);
-      setImage(file);
+      const file = e.target.files[0];
+      const formData = new FormData();
+      formData.append('img', file);
+
+      ImageUpload(formData, {
+        onSuccess: () => {
+          setImage(URL.createObjectURL(file));
+        }
+      });
     }
   };
+
+  const { mutate: ImageUpload } = useMutation(Upload_Image, {
+    onSuccess: (res) => {
+      setImageUrl(res.data.url);
+    },
+    onError: (err: any) => {
+      if (err.status === 413) {
+        alert('사진 용량이 너무 큽니다.');
+      }
+    }
+  });
 
   const handleIconClick = () => {
     if (fileInputRef.current) {

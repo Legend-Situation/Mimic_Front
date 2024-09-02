@@ -9,8 +9,8 @@ export const ChatUpload_Frame = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-gap: 8px;
-margin-bottom: 30px;
+  gap: 8px;
+  margin-bottom: 30px;
 `;
 
 export const ChatUpload_Layout = styled.div<ChatUploadProps>`
@@ -24,6 +24,23 @@ export const ChatUpload_Layout = styled.div<ChatUploadProps>`
   background: ${({ isUploaded }) =>
     isUploaded ? theme.primary[6] : theme.gray[50]};
   color: ${({ isUploaded }) => (isUploaded ? 'white' : theme.gray.black)};
+`;
+
+export const ChatUpload_Loading_Layout = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 130px;
+  padding: 16px;
+  border-radius: 8px;
+  background: ${theme.gray[50]};
+`;
+
+export const ChatUpload_Loading = styled.img`
+  width: 50px;
+  height: 50px;
 `;
 
 export const ChatUpload_TextContainer = styled.div`
@@ -86,9 +103,7 @@ export const ChatUpload_HiddenFileInput = styled.input`
   display: none;
 `;
 
-export const ChatUpload_DropdownContainer = styled.div`
-
-`;
+export const ChatUpload_DropdownContainer = styled.div``;
 
 export const ChatUpload_DropdownWrapper = styled.div`
   position: relative;
@@ -107,10 +122,10 @@ export const ChatUpload_Dropdown = styled.select`
   appearance: none;
 
   &:focus {
-    border-color:${theme.primary[6]};
+    border-color: ${theme.primary[6]};
     outline: none;
   }
-  `
+`;
 
 export const ChatUpload_Option = styled.option`
   padding: 8px;
