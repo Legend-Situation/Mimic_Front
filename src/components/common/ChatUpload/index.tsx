@@ -91,7 +91,7 @@ function ChatUpload({
               <_.ChatUpload_Title isUploaded={isUploaded}>
                 {isUploaded
                   ? '성공적으로 업로드 되었어요 🌿'
-                  : '더 정확한 대화를 하고 싶다면?'}
+                  : '업로드할 파일을 선택해 주세요'}
               </_.ChatUpload_Title>
               <_.ChatUpload_Description isUploaded={isUploaded}>
                 대화 내용은 본인 외에 확인 할 수 없으니 안심하세요!
