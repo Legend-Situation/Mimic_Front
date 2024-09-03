@@ -41,3 +41,19 @@ export const Chat_Delete = async (chatid: string) => {
   const { data } = await AuthInstance.delete(`/chat/chatting/${chatid}`);
   return data;
 };
+
+interface DeleteParams {
+  chaid: string;
+  name: string;
+  profileImg: string;
+  info: string;
+  age: string;
+}
+
+export const Chat_Update = async (params: DeleteParams) => {
+  const { data } = await AuthInstance.delete(
+    `/chat/chatting/${params.chaid}`,
+    {}
+  );
+  return data;
+};

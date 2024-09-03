@@ -129,7 +129,11 @@ const Chatting = () => {
 
   return (
     <_.Chatting_Layout>
-      <MainHeader title={chatLog?.data?.name} propertyIcon={true} />
+      <MainHeader
+        title={chatLog?.data?.name}
+        propertyIcon={true}
+        chatid={params}
+      />
       <_.Chatting_Messages>
         {chatHistories
           ?.filter(

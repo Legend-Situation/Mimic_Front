@@ -1,11 +1,11 @@
-import React, { useReducer, useState } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import * as _ from './style';
 import MainHeader from 'components/Headers/MainHeader';
 import ProfileLayout from 'components/common/ProfileLayout';
 import LineInputLayout from 'components/common/LineInputLayout';
 import ButtonLayout from 'components/common/ButtonLayout';
-import TraitsInputLayout from 'components/common/InfoInputLayout';
+import InfoInputLayout from 'components/common/InfoInputLayout';
 import { initialState, reducer, State } from 'lib/utils/AddPartnerReducer';
 import { useMutation } from 'react-query';
 import { Chat_Delete } from 'lib/api/Chat';
@@ -26,7 +26,8 @@ const UserProfile = () => {
     });
   };
 
-  const handleTraitsChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  
+  const handleInfoChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     dispatch({
       type: 'SET_INPUT_VALUE',
       payload: { name: 'info', value: e.target.value }
@@ -70,6 +71,7 @@ const UserProfile = () => {
           setImageUrl={setImageUrl}
         />
         <LineInputLayout
+          name="name"
           label="이름"
           placeholder="사용자이름"
           value={state.name}
@@ -77,6 +79,7 @@ const UserProfile = () => {
           isEditing={isEditing}
         />
         <LineInputLayout
+          name="age"
           label="나이"
           placeholder="18"
           value={state.age}
@@ -85,9 +88,9 @@ const UserProfile = () => {
         />
         <_.UserProfile_TextAreaBox>
           <_.UserProfile_Label>특징</_.UserProfile_Label>
-          <TraitsInputLayout
+          <InfoInputLayout
             info={state.info}
-            onInfoChange={handleTraitsChange}
+            onInfoChange={handleInfoChange}
             isEditing={isEditing}
           />
         </_.UserProfile_TextAreaBox>

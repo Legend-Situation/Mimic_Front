@@ -1,10 +1,8 @@
-// 라이브러리
 import React from 'react';
-
-// 파일
 import * as _ from './style';
 
 interface LineInputLayoutProps {
+  name: string;
   label: string;
   placeholder: string;
   value: string;
@@ -13,16 +11,18 @@ interface LineInputLayoutProps {
 }
 
 const LineInputLayout = ({
+  name,
   label,
   placeholder,
   value,
   onChange,
-  isEditing,
+  isEditing
 }: LineInputLayoutProps) => {
   return (
     <_.LineInputLayout_Container>
       <_.LineInputLayout_Label>{label}</_.LineInputLayout_Label>
       <_.LineInputLayout_Input
+        name={name}
         placeholder={placeholder}
         value={value}
         onChange={onChange}
