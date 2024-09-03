@@ -38,7 +38,8 @@ export const Login_Inputs = styled.div`
 `;
 
 export const Login_Button = styled.div`
-  margin-top: 241px;
+  margin-top: auto;
+  padding-bottom: 24px;
 `;
 
 export const Login_HelperList = styled.div`

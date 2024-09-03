@@ -1,19 +1,25 @@
 import React from 'react';
 import * as _ from './style';
 import Loading from 'components/Loading';
-import Profile from 'assets/image/Profile.png';
 
 interface MessageProps {
   role: string;
   message: string;
   isLoading: boolean;
   name: string;
+  profileImg: string;
 }
 
-const Message = ({ role, message: msg, isLoading, name }: MessageProps) => {
+const Message = ({
+  role,
+  message: msg,
+  isLoading,
+  name,
+  profileImg
+}: MessageProps) => {
   return (
     <_.Message_Layout role={role}>
-      {role === 'assistant' ? <_.Message_Image src={Profile} /> : ''}
+      {role === 'assistant' ? <_.Message_Image src={profileImg} /> : ''}
       <_.Message_Right>
         {role === 'assistant' ? <_.Message_Name>{name}</_.Message_Name> : ''}
         <_.Message_Box role={role}>

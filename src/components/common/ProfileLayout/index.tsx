@@ -25,17 +25,15 @@ const ProfileLayout = ({
       formData.append('img', file);
 
       ImageUpload(formData, {
-        onSuccess: () => {
+        onSuccess: (res) => {
           setImage(URL.createObjectURL(file));
+          setImageUrl(res.data.url);
         }
       });
     }
   };
 
   const { mutate: ImageUpload } = useMutation(Upload_Image, {
-    onSuccess: (res) => {
-      setImageUrl(res.data.url);
-    },
     onError: (err: any) => {
       if (err.status === 413) {
         alert('사진 용량이 너무 큽니다.');

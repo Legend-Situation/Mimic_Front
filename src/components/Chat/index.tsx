@@ -1,6 +1,5 @@
 import React from 'react';
 import * as _ from './style';
-import Profile from 'assets/image/Profile.png';
 
 interface ChatProps {
   image: string;

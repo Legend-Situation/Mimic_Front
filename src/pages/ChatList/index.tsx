@@ -8,6 +8,8 @@ import { useQuery } from 'react-query';
 import { Chat_List } from 'lib/api/Chat';
 import Loading from 'assets/image/Loading.gif';
 import { useNavigate } from 'react-router-dom';
+import Profile from 'assets/image/Profile.png';
+import { Auth_UserState } from 'lib/api/Auth';
 
 type ChatItem = {
   chatid: string;
@@ -22,22 +24,37 @@ type ChatItem = {
 };
 
 const Main = () => {
-  const history = useNavigate();
+  const navigate = useNavigate();
   const [chatList, setChatList] = useState<ChatItem[]>([]);
 
-  const { isLoading, data: newChatList } = useQuery('getChatList', Chat_List, {
-    keepPreviousData: true,
-    refetchOnWindowFocus: false,
-    retry: 0,
-    onError: (err: any) => {
-      if (err.response?.status === 404) {
-        setChatList([]);
-      } else {
-        console.error(err.response || err.message);
+  const { isLoading: newChatLisLoading, data: newChatList } = useQuery(
+    'getChatList',
+    Chat_List,
+    {
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
+      retry: 0,
+      onError: (err: any) => {
+        if (err.response?.status === 404) {
+          setChatList([]);
+        } else {
+          console.error(err.response || err.message);
+        }
+      },
+      onSuccess: (data) => {
+        setChatList(data.data);
       }
-    },
-    onSuccess: (data) => {
-      setChatList(data.data);
+    }
+  );
+
+  const { isError } = useQuery('getUserState', Auth_UserState, {
+    refetchOnWindowFocus: false,
+    retry: 0
+  });
+
+  useEffect(() => {
+    if (isError) {
+      navigate('/login');
     }
   });
 
@@ -52,8 +69,8 @@ const Main = () => {
   return (
     <>
       <ChatHeader />
-      <_.Main_Layout isLoading={isLoading}>
-        {isLoading ? (
+      <_.Main_Layout isLoading={newChatLisLoading}>
+        {newChatLisLoading ? (
           <_.Main_Loading_Container>
             <_.Main_Loading src={Loading} alt="로딩" />
           </_.Main_Loading_Container>
@@ -69,7 +86,7 @@ const Main = () => {
                 <Chat
                   key={`${chat.chatid}-${index}`}
                   chatid={chat.chatid}
-                  image={chat.profileImg}
+                  image={chat.profileImg || Profile}
                   name={chat.name}
                   content={lastContent}
                 />
@@ -82,7 +99,7 @@ const Main = () => {
             <_.Main_Notice>아직 채팅이 시작되지 않았어요...</_.Main_Notice>
             <_.Main_Add
               onClick={() => {
-                history('/addPartner');
+                navigate('/addPartner');
               }}
             >
               상대방 추가하기

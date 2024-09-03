@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as _ from './style';
 import MainHeader from 'components/Headers/MainHeader';
 import Logo from 'assets/icon/Logo';
 import InputLayout from 'components/common/InputLayout';
 import ButtonLayout from 'components/common/ButtonLayout';
-import { useMutation } from 'react-query';
-import { Auth_Login } from 'lib/api/Auth';
+import { useMutation, useQuery } from 'react-query';
+import { Auth_Login, Auth_UserState } from 'lib/api/Auth';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
@@ -44,6 +44,17 @@ const Login = () => {
   const onSubmit = () => {
     LoginMutate({ userid: inputs.userid, password: inputs.password });
   };
+
+  const { isSuccess } = useQuery('getUserState', Auth_UserState, {
+    refetchOnWindowFocus: false,
+    retry: 0
+  });
+
+  useEffect(() => {
+    if (isSuccess) {
+      navigate('/');
+    }
+  });
 
   return (
     <>

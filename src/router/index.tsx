@@ -7,7 +7,6 @@ import Login from 'pages/Login';
 import ChatList from 'pages/ChatList';
 import Chatting from 'pages/Chatting';
 import AddPartner from 'pages/AddPartner';
-import UserDetails from 'pages/UserDetails';
 import UserProfile from 'pages/UserProfile';
 
 export default function Router() {
@@ -22,8 +21,7 @@ export default function Router() {
         { path: '/login', element: <Login /> },
         { path: '/chatting/:id', element: <Chatting /> },
         { path: '/addpartner', element: <AddPartner /> },
-        { path: '/userdetails', element: <UserDetails /> },
-        { path: '/Userprofile', element: <UserProfile /> }
+        { path: '/userprofile/:id', element: <UserProfile /> }
       ]
     }
     // { path: '*', element: <NotFound /> }

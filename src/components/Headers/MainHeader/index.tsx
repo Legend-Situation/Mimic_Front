@@ -13,6 +13,7 @@ interface MainHeaderProps {
   control?: '편집' | '저장';
   isEditing?: boolean;
   onControlClick?: () => void;
+  chatid?: string | undefined;
 }
 
 const MainHeader = ({
@@ -21,6 +22,7 @@ const MainHeader = ({
   control,
   isEditing,
   onControlClick,
+  chatid
 }: MainHeaderProps) => {
   const navigate = useNavigate();
 
@@ -37,7 +39,7 @@ const MainHeader = ({
       {propertyIcon && (
         <Property
           onClick={() => {
-            return;
+            navigate(`/userprofile/${chatid}`);
           }}
         />
       )}

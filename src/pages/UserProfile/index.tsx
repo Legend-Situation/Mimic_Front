@@ -1,39 +1,104 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useReducer, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import * as _ from './style';
 import MainHeader from 'components/Headers/MainHeader';
 import ProfileLayout from 'components/common/ProfileLayout';
 import LineInputLayout from 'components/common/LineInputLayout';
-import ChatUpload from 'components/common/ChatUpload';
 import ButtonLayout from 'components/common/ButtonLayout';
-import TraitsInputLayout from 'components/common/InfoInputLayout';
+import InfoInputLayout from 'components/common/InfoInputLayout';
+import { initialState, reducer, State } from 'lib/utils/AddPartnerReducer';
+import { useMutation, useQuery } from 'react-query';
+import { Chat_Delete, Chat_Get, Chat_Update } from 'lib/api/Chat';
 
 const UserProfile = () => {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const [imageUrl, setImageUrl] = useState<string>('');
   const [isEditing, setIsEditing] = useState(false);
-  const [name, setName] = useState('사용자이름');
-  const [age, setAge] = useState('18');
-  const [inputs, setInputs] = useState({
-    traits:
-      '애는 내 남친이야 나랑 사귀어 잘생긴 훈남 st ㅋㅋ 공부도 잘 하고 나를 귀여밍이라고 불러줌'
-  });
-
+  const params = useParams().id;
   const navigate = useNavigate();
 
-  const handleTraitsChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const { value } = e.target;
-    setInputs({
-      ...inputs,
-      traits: value
+  const { data: userData } = useQuery(
+    ['getUserData', params],
+    () => {
+      if (params) {
+        return Chat_Get(params);
+      }
+    },
+    {
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
+      retry: 0,
+      onError: (err: any) => {
+        console.log(err);
+      }
+    }
+  );
+
+  const handleInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    dispatch({
+      type: 'SET_INPUT_VALUE',
+      payload: { name: name as keyof State, value }
+    });
+  };
+
+  const handleInfoChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    dispatch({
+      type: 'SET_INPUT_VALUE',
+      payload: { name: 'info', value: e.target.value }
     });
   };
 
   const handleControlClick = () => {
+    if (isEditing && params) {
+      Chat_Update({
+        chatid: params,
+        name: state.name,
+        profileImg: state.profileImg,
+        info: state.info,
+        age: state.age
+      });
+    }
     setIsEditing(!isEditing);
   };
 
+  const { mutate: ChatDeleteMutate } = useMutation(Chat_Delete, {
+    onSuccess: () => {
+      navigate('/');
+    },
+    onError: (err) => {
+      alert('채팅 삭제 실패');
+      console.log(err);
+    }
+  });
+
   const handleChatExit = () => {
-    navigate('/chatList');
+    const check = confirm('채팅을 삭제하시겠습니까?');
+    if (params && check) {
+      ChatDeleteMutate(params);
+    }
   };
+
+  useEffect(() => {
+    if (userData) {
+      dispatch({
+        type: 'SET_INPUT_VALUE',
+        payload: { name: 'name', value: userData.data.name }
+      });
+      dispatch({
+        type: 'SET_INPUT_VALUE',
+        payload: { name: 'profileImg', value: userData.data.profileImg }
+      });
+      dispatch({
+        type: 'SET_INPUT_VALUE',
+        payload: { name: 'age', value: userData.data.age }
+      });
+      dispatch({
+        type: 'SET_INPUT_VALUE',
+        payload: { name: 'info', value: userData.data.info }
+      });
+    }
+  }, [userData]);
 
   return (
     <>
@@ -45,39 +110,46 @@ const UserProfile = () => {
         onControlClick={handleControlClick}
       />
       <_.UserProfile_Layout>
-        <ProfileLayout_Layout edit={isEditing} />
+        <ProfileLayout
+          edit={isEditing}
+          profileImage={initialState.profileImg}
+          setImageUrl={setImageUrl}
+        />
         <LineInputLayout
+          name="name"
           label="이름"
           placeholder="사용자이름"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          value={state.name}
+          onChange={handleInputValue}
           isEditing={isEditing}
         />
         <LineInputLayout
+          name="age"
           label="나이"
           placeholder="18"
-          value={age}
-          onChange={(e) => setAge(e.target.value)}
+          value={state.age}
+          onChange={handleInputValue}
           isEditing={isEditing}
         />
         <_.UserProfile_TextAreaBox>
           <_.UserProfile_Label>특징</_.UserProfile_Label>
-          <TraitsInputLayout
-            traits={inputs.traits}
-            onTraitsChange={handleTraitsChange}
+          <InfoInputLayout
+            info={state.info}
+            onInfoChange={handleInfoChange}
             isEditing={isEditing}
           />
         </_.UserProfile_TextAreaBox>
-        <ChatUpload />
-        <ButtonLayout
-          value="채팅방 나가기"
-          state={true}
-          width="100%"
-          backgroundColor="#ffffff"
-          borderColor="#FF6B6B"
-          textColor="#ff6b6b"
-          onClick={handleChatExit}
-        />
+        <_.UserProfile_Button>
+          <ButtonLayout
+            value="채팅방 나가기"
+            state={true}
+            width="100%"
+            backgroundColor="#ffffff"
+            borderColor="#FF6B6B"
+            textColor="#ff6b6b"
+            onClick={handleChatExit}
+          />
+        </_.UserProfile_Button>
       </_.UserProfile_Layout>
     </>
   );
