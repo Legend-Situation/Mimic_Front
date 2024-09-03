@@ -8,9 +8,10 @@ import ChatUpload from 'components/common/ChatUpload';
 import ButtonLayout from 'components/common/ButtonLayout';
 import InfoInputLayout from 'components/common/InfoInputLayout';
 import { reducer, initialState, State } from 'lib/utils/AddPartnerReducer';
-import { useMutation } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 import { Chat_Create } from 'lib/api/Chat';
 import { useNavigate } from 'react-router-dom';
+import { Auth_UserState } from 'lib/api/Auth';
 const AddPartner = () => {
   const navigate = useNavigate();
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -23,6 +24,17 @@ const AddPartner = () => {
         user2: ''
       }
     ]
+  });
+
+  const { isError } = useQuery('getUserState', Auth_UserState, {
+    refetchOnWindowFocus: false,
+    retry: 0
+  });
+
+  useEffect(() => {
+    if (isError) {
+      navigate('/login');
+    }
   });
 
   const handleInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {

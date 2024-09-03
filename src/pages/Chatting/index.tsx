@@ -1,4 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  ChangeEvent,
+  KeyboardEvent
+} from 'react';
 import MainHeader from 'components/Headers/MainHeader';
 import Message from 'components/Message';
 import * as _ from './style';
@@ -10,45 +16,51 @@ import { ChatLog } from 'types/chatLog';
 import Profile from 'assets/image/Profile.png';
 import { useParams } from 'react-router-dom';
 
-const Chatting = () => {
+interface ChatMessage {
+  role: string;
+  content: { text: string }[];
+}
+
+const Chatting = (): JSX.Element => {
   const [message, setMessage] = useState<string>('');
-  const [pendingMessage, setPendingMessage] = useState<any>(null);
+  const [pendingMessage, setPendingMessage] = useState<ChatMessage | null>(
+    null
+  );
   const [isWaitingForReply, setIsWaitingForReply] = useState<boolean>(false);
   const messageEndRef = useRef<HTMLDivElement | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const [chatLog, setChatLog] = useState<ChatLog>();
-  const params = useParams().id;
+  const params = useParams<{ id: string }>().id;
   const chatHistories = chatLog?.data?.conversation?.messages || [];
   const queryClient = useQueryClient();
 
   const { mutate: sendMessageMutate } = useMutation(Chat_Send, {
-    onMutate: async (newMessage) => {
+    onMutate: async (newMessage: { previousConversation: string }) => {
       setPendingMessage({
         role: 'user',
         content: [{ text: newMessage.previousConversation }]
       });
       setIsWaitingForReply(true);
+      return Promise.resolve();
     },
-    onSuccess: (res) => {
+    onSuccess: (res: any) => {
       if (res) {
         setPendingMessage(null);
-        setChatLog((prevChatLog) => {
-          if (prevChatLog) {
-            return {
-              ...prevChatLog,
-              data: {
-                ...prevChatLog.data,
-                conversation: {
-                  ...prevChatLog.data.conversation,
-                  messages: [
-                    ...prevChatLog.data.conversation.messages,
-                    res.data
-                  ]
-                }
+        setChatLog((prevChatLog: any) => {
+          const updatedMessages = [
+            ...(prevChatLog?.data?.conversation?.messages || []),
+            res.data
+          ];
+          return {
+            ...prevChatLog,
+            data: {
+              ...prevChatLog?.data,
+              conversation: {
+                ...prevChatLog?.data?.conversation,
+                messages: updatedMessages
               }
-            };
-          }
-          return prevChatLog;
+            }
+          };
         });
         queryClient.invalidateQueries('getChatLog');
         setIsWaitingForReply(false);
@@ -65,24 +77,24 @@ const Chatting = () => {
     }
   });
 
-  useQuery(
+  useQuery<ChatLog>(
     'getChatLog',
     async () => {
       if (params) {
         return await Chat_Log(params);
       }
+      throw new Error('Chat parameter is missing');
     },
     {
       keepPreviousData: true,
       refetchOnWindowFocus: false,
       retry: 0,
       onError: (err: any) => console.log(err),
-      onSuccess: (res) => {
+      onSuccess: (res: ChatLog) => {
         setChatLog((prev) => ({
           ...prev,
           ...res
         }));
-        // 채팅 내역을 불러온 후 스크롤을 가장 아래로 설정
         setTimeout(() => {
           if (messageEndRef.current) {
             messageEndRef.current.scrollIntoView({ behavior: 'auto' });
@@ -104,7 +116,7 @@ const Chatting = () => {
 
   const resizeHeight = (
     textarea: React.RefObject<HTMLTextAreaElement>,
-    e: React.ChangeEvent<HTMLTextAreaElement>
+    e: ChangeEvent<HTMLTextAreaElement>
   ) => {
     if (textarea.current) {
       textarea.current.style.height = 'auto';

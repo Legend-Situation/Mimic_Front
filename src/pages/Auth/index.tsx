@@ -1,12 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import * as _ from './style';
 import AuthLogo from 'assets/image/authLogo.png';
 import Bubble from 'assets/image/Bubble';
 import ButtonLayout from 'components/common/ButtonLayout';
 import { useNavigate } from 'react-router-dom';
+import { useQuery } from 'react-query';
+import { Auth_UserState } from 'lib/api/Auth';
 
 const Auth = () => {
   const history = useNavigate();
+
+  const { isSuccess } = useQuery('getUserState', Auth_UserState, {
+    refetchOnWindowFocus: false,
+    retry: 0
+  });
+
+  useEffect(() => {
+    if (isSuccess) {
+      history('/');
+    }
+  });
+
   return (
     <_.Auth_Container>
       <_.Auth_Title>
