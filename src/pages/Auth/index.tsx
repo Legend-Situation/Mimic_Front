@@ -3,8 +3,10 @@ import * as _ from './style';
 import AuthLogo from 'assets/image/authLogo.png';
 import Bubble from 'assets/image/Bubble';
 import ButtonLayout from 'components/common/ButtonLayout';
+import { useNavigate } from 'react-router-dom';
 
 const Auth = () => {
+  const history = useNavigate();
   return (
     <_.Auth_Container>
       <_.Auth_Title>
@@ -23,13 +25,19 @@ const Auth = () => {
         <ButtonLayout
           value="로그인"
           onClick={() => {
-            return 0;
+            history('/login');
           }}
           width="100%"
           state={true}
         />
         또는
-        <_.Auth_Buttons_Register>회원가입</_.Auth_Buttons_Register>
+        <_.Auth_Buttons_Register
+          onClick={() => {
+            history('/register');
+          }}
+        >
+          회원가입
+        </_.Auth_Buttons_Register>
       </_.Auth_Buttons>
     </_.Auth_Container>
   );
