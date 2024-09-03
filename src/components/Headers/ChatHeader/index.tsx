@@ -5,6 +5,7 @@ import React from 'react';
 import * as _ from './style';
 import Plus from 'assets/icon/Plus';
 import { useNavigate } from 'react-router-dom';
+import Logout from 'assets/icon/Logout';
 
 const ChatHeader = () => {
   const history = useNavigate();
@@ -18,11 +19,7 @@ const ChatHeader = () => {
             history('/addpartner');
           }}
         />
-        <_.ChatHeader_Image
-          onClick={() => {
-            history('/userdetails');
-          }}
-        />
+        <Logout />
       </_.ChatHeader_Icons>
     </_.ChatHeader_Layout>
   );
