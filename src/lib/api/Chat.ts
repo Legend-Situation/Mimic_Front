@@ -42,18 +42,25 @@ export const Chat_Delete = async (chatid: string) => {
   return data;
 };
 
-interface DeleteParams {
-  chaid: string;
+export const Chat_Get = async (chatid: string) => {
+  const { data } = await AuthInstance.get(`/chat/chatuser/${chatid}`);
+  return data;
+};
+
+interface UpdateParams {
+  chatid: string;
   name: string;
   profileImg: string;
   info: string;
   age: string;
 }
 
-export const Chat_Update = async (params: DeleteParams) => {
-  const { data } = await AuthInstance.delete(
-    `/chat/chatting/${params.chaid}`,
-    {}
-  );
+export const Chat_Update = async (params: UpdateParams) => {
+  const { data } = await AuthInstance.put(`/chat/chatting/${params.chatid}`, {
+    name: params.name,
+    profileImg: params.profileImg,
+    info: params.info,
+    age: params.age
+  });
   return data;
 };

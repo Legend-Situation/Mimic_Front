@@ -7,16 +7,32 @@ import LineInputLayout from 'components/common/LineInputLayout';
 import ButtonLayout from 'components/common/ButtonLayout';
 import InfoInputLayout from 'components/common/InfoInputLayout';
 import { initialState, reducer, State } from 'lib/utils/AddPartnerReducer';
-import { useMutation } from 'react-query';
-import { Chat_Delete } from 'lib/api/Chat';
+import { useMutation, useQuery } from 'react-query';
+import { Chat_Delete, Chat_Get, Chat_Update } from 'lib/api/Chat';
 
 const UserProfile = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [imageUrl, setImageUrl] = useState<string>('');
   const [isEditing, setIsEditing] = useState(false);
   const params = useParams().id;
-
   const navigate = useNavigate();
+
+  const { data: userData } = useQuery(
+    ['getUserData', params],
+    () => {
+      if (params) {
+        return Chat_Get(params);
+      }
+    },
+    {
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
+      retry: 0,
+      onError: (err: any) => {
+        console.log(err);
+      }
+    }
+  );
 
   const handleInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -26,7 +42,6 @@ const UserProfile = () => {
     });
   };
 
-  
   const handleInfoChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     dispatch({
       type: 'SET_INPUT_VALUE',
@@ -35,6 +50,15 @@ const UserProfile = () => {
   };
 
   const handleControlClick = () => {
+    if (isEditing && params) {
+      Chat_Update({
+        chatid: params,
+        name: state.name,
+        profileImg: state.profileImg,
+        info: state.info,
+        age: state.age
+      });
+    }
     setIsEditing(!isEditing);
   };
 
@@ -55,6 +79,27 @@ const UserProfile = () => {
     }
   };
 
+  useEffect(() => {
+    if (userData) {
+      dispatch({
+        type: 'SET_INPUT_VALUE',
+        payload: { name: 'name', value: userData.data.name }
+      });
+      dispatch({
+        type: 'SET_INPUT_VALUE',
+        payload: { name: 'profileImg', value: userData.data.profileImg }
+      });
+      dispatch({
+        type: 'SET_INPUT_VALUE',
+        payload: { name: 'age', value: userData.data.age }
+      });
+      dispatch({
+        type: 'SET_INPUT_VALUE',
+        payload: { name: 'info', value: userData.data.info }
+      });
+    }
+  }, [userData]);
+
   return (
     <>
       <MainHeader
@@ -67,7 +112,7 @@ const UserProfile = () => {
       <_.UserProfile_Layout>
         <ProfileLayout
           edit={isEditing}
-          profileImage={state.profileImg}
+          profileImage={initialState.profileImg}
           setImageUrl={setImageUrl}
         />
         <LineInputLayout
