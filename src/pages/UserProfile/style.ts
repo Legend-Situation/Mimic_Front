@@ -3,7 +3,7 @@ import { theme } from 'lib/utils/style/theme';
 
 export const UserProfile_Layout = styled.div`
   width: 100%;
-  height: 100%;
+  height: calc(100vh - 40px);
   padding: 0 20px 40px;
   display: flex;
   flex-direction: column;
@@ -23,5 +23,5 @@ export const UserProfile_Label = styled.label`
 `;
 
 export const UserProfile_Button = styled.div`
-  margin-top: 175px;
+  margin-top: auto;
 `;

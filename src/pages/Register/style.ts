@@ -38,5 +38,6 @@ export const Register_Inputs = styled.div`
 `;
 
 export const Register_Button = styled.div`
-  margin-top: 77px;
+  margin-top: auto;
+  padding-bottom: 24px;
 `;
