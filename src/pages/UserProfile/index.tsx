@@ -1,27 +1,20 @@
 import React, { useReducer, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import * as _ from './style';
 import MainHeader from 'components/Headers/MainHeader';
 import ProfileLayout from 'components/common/ProfileLayout';
 import LineInputLayout from 'components/common/LineInputLayout';
-import ChatUpload from 'components/common/ChatUpload';
 import ButtonLayout from 'components/common/ButtonLayout';
 import TraitsInputLayout from 'components/common/InfoInputLayout';
 import { initialState, reducer, State } from 'lib/utils/AddPartnerReducer';
+import { useMutation } from 'react-query';
+import { Chat_Delete } from 'lib/api/Chat';
 
 const UserProfile = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [imageUrl, setImageUrl] = useState<string>('');
   const [isEditing, setIsEditing] = useState(false);
-  const [data, setData] = useState({
-    FileURL: '',
-    Contents: [
-      {
-        user1: '',
-        user2: ''
-      }
-    ]
-  });
+  const params = useParams().id;
 
   const navigate = useNavigate();
 
@@ -44,8 +37,21 @@ const UserProfile = () => {
     setIsEditing(!isEditing);
   };
 
+  const { mutate: ChatDeleteMutate } = useMutation(Chat_Delete, {
+    onSuccess: () => {
+      navigate('/');
+    },
+    onError: (err) => {
+      alert('채팅 삭제 실패');
+      console.log(err);
+    }
+  });
+
   const handleChatExit = () => {
-    navigate('/chatList');
+    const check = confirm('채팅을 삭제하시겠습니까?');
+    if (params && check) {
+      ChatDeleteMutate(params);
+    }
   };
 
   return (
@@ -85,27 +91,17 @@ const UserProfile = () => {
             isEditing={isEditing}
           />
         </_.UserProfile_TextAreaBox>
-        <ChatUpload
-          isUploaded={state.isUploaded}
-          setIsUploaded={(isUploaded) =>
-            dispatch({ type: 'SET_IS_UPLOADED', payload: isUploaded })
-          }
-          selectedPerson={state.selectedPerson}
-          setSelectedPerson={(person) =>
-            dispatch({ type: 'SET_SELECTED_PERSON', payload: person })
-          }
-          data={data}
-          setData={setData}
-        />
-        <ButtonLayout
-          value="채팅방 나가기"
-          state={true}
-          width="100%"
-          backgroundColor="#ffffff"
-          borderColor="#FF6B6B"
-          textColor="#ff6b6b"
-          onClick={handleChatExit}
-        />
+        <_.UserProfile_Button>
+          <ButtonLayout
+            value="채팅방 나가기"
+            state={true}
+            width="100%"
+            backgroundColor="#ffffff"
+            borderColor="#FF6B6B"
+            textColor="#ff6b6b"
+            onClick={handleChatExit}
+          />
+        </_.UserProfile_Button>
       </_.UserProfile_Layout>
     </>
   );

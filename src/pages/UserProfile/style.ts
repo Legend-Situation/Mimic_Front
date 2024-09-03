@@ -21,3 +21,7 @@ export const UserProfile_Label = styled.label`
   color: ${theme.gray[300]};
   margin-bottom: 8px;
 `;
+
+export const UserProfile_Button = styled.div`
+  margin-top: 175px;
+`;

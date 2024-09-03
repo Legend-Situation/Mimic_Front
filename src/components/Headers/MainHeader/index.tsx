@@ -20,7 +20,7 @@ const MainHeader = ({
   propertyIcon = false,
   control,
   isEditing,
-  onControlClick,
+  onControlClick
 }: MainHeaderProps) => {
   const navigate = useNavigate();
 
@@ -37,7 +37,7 @@ const MainHeader = ({
       {propertyIcon && (
         <Property
           onClick={() => {
-            return;
+            navigate('/userprofile');
           }}
         />
       )}

@@ -36,3 +36,8 @@ export const Chat_Send = async (params: SendParams) => {
   });
   return data;
 };
+
+export const Chat_Delete = async (chatid: string) => {
+  const { data } = await AuthInstance.delete(`/chat/chatting/${chatid}`);
+  return data;
+};
