@@ -9,6 +9,7 @@ import InfoInputLayout from 'components/common/InfoInputLayout';
 import { initialState, reducer, State } from 'lib/utils/AddPartnerReducer';
 import { useMutation, useQuery } from 'react-query';
 import { Chat_Delete, Chat_Get, Chat_Update } from 'lib/api/Chat';
+import { Auth_UserState } from 'lib/api/Auth';
 
 const UserProfile = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -16,6 +17,17 @@ const UserProfile = () => {
   const [isEditing, setIsEditing] = useState(false);
   const params = useParams().id;
   const navigate = useNavigate();
+
+  const { isError } = useQuery('getUserState', Auth_UserState, {
+    refetchOnWindowFocus: false,
+    retry: 0
+  });
+
+  useEffect(() => {
+    if (isError) {
+      navigate('/login');
+    }
+  });
 
   const { data: userData } = useQuery(
     ['getUserData', params],
