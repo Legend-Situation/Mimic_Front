@@ -78,4 +78,8 @@ export const AddPartner_UploadLabel = styled.label`
   font-size: 16px;
   font-weight: 500;
   color: ${theme.gray.black};
+  &::after {
+    content: ' *';
+    color: ${theme.sub.red};
+  }
 `;
