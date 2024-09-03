@@ -124,7 +124,7 @@ const UserProfile = () => {
       <_.UserProfile_Layout>
         <ProfileLayout
           edit={isEditing}
-          profileImage={initialState.profileImg}
+          profileImage={state.profileImg}
           setImageUrl={setImageUrl}
         />
         <LineInputLayout
