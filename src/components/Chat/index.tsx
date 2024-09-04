@@ -19,7 +19,7 @@ const Chat = ({ image, name, content, time, chatid }: ChatProps) => {
           <_.Chat_Content>{content}</_.Chat_Content>
         </_.Chat_Detail>
         {/* <_.Chat_Time>{time}</_.Chat_Time> */}
-        <_.Chat_Count>N</_.Chat_Count>
+        {/* <_.Chat_Count>N</_.Chat_Count> */}
       </_.Chat_Layout>
     </_.Chat_Link>
   );
