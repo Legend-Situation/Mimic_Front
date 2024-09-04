@@ -57,11 +57,20 @@ const AddPartner = () => {
   };
 
   const isFormValid = () => {
-    const { name, info, age, gender, chatUrl } = state;
+    const { name, info, age, gender, selectedPerson } = state;
     return (
-      name == '' || info == '' || age == '' || gender == '' || chatUrl == ''
+      name == '' ||
+      info == '' ||
+      age == '' ||
+      gender == '' ||
+      data.FileURL == '' ||
+      selectedPerson == ''
     );
   };
+
+  useEffect(() => {
+    console.log(state);
+  }, [state]);
 
   const { mutate: CreateMutate } = useMutation(Chat_Create, {
     onSuccess: (res) => {
