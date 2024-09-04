@@ -9,25 +9,13 @@ import InfoInputLayout from 'components/common/InfoInputLayout';
 import { initialState, reducer, State } from 'lib/utils/AddPartnerReducer';
 import { useMutation, useQuery } from 'react-query';
 import { Chat_Delete, Chat_Get, Chat_Update } from 'lib/api/Chat';
-import { Auth_UserState } from 'lib/api/Auth';
 
-const UserProfile = () => {
+const UserProfile: React.FC = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [imageUrl, setImageUrl] = useState<string>('');
   const [isEditing, setIsEditing] = useState(false);
-  const params = useParams().id;
+  const params = useParams<{ id: string }>().id;
   const navigate = useNavigate();
-
-  const { isError } = useQuery('getUserState', Auth_UserState, {
-    refetchOnWindowFocus: false,
-    retry: 0
-  });
-
-  useEffect(() => {
-    if (isError) {
-      navigate('/login');
-    }
-  });
 
   const { data: userData } = useQuery(
     ['getUserData', params],
@@ -41,12 +29,12 @@ const UserProfile = () => {
       refetchOnWindowFocus: false,
       retry: 0,
       onError: (err: any) => {
-        console.log(err);
+        console.error(err);
       }
     }
   );
 
-  const handleInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputValue = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = e.target;
     dispatch({
       type: 'SET_INPUT_VALUE',
@@ -54,14 +42,16 @@ const UserProfile = () => {
     });
   };
 
-  const handleInfoChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleInfoChange = (
+    e: React.ChangeEvent<HTMLTextAreaElement>
+  ): void => {
     dispatch({
       type: 'SET_INPUT_VALUE',
       payload: { name: 'info', value: e.target.value }
     });
   };
 
-  const handleControlClick = () => {
+  const handleControlClick = (): void => {
     if (isEditing && params) {
       Chat_Update({
         chatid: params,
@@ -70,21 +60,31 @@ const UserProfile = () => {
         info: state.info,
         age: state.age
       });
+
+      console.log(state.profileImg); // 업데이트된 값 확인
     }
     setIsEditing(!isEditing);
+  };
+
+  const handleSetImageUrl = (url: string): void => {
+    setImageUrl(url);
+    dispatch({
+      type: 'SET_INPUT_VALUE',
+      payload: { name: 'profileImg', value: url }
+    });
   };
 
   const { mutate: ChatDeleteMutate } = useMutation(Chat_Delete, {
     onSuccess: () => {
       navigate('/');
     },
-    onError: (err) => {
+    onError: (err: any) => {
       alert('채팅 삭제 실패');
-      console.log(err);
+      console.error(err);
     }
   });
 
-  const handleChatExit = () => {
+  const handleChatExit = (): void => {
     const check = confirm('채팅을 삭제하시겠습니까?');
     if (params && check) {
       ChatDeleteMutate(params);
@@ -125,7 +125,7 @@ const UserProfile = () => {
         <ProfileLayout
           edit={isEditing}
           profileImage={state.profileImg}
-          setImageUrl={setImageUrl}
+          setImageUrl={handleSetImageUrl}
         />
         <LineInputLayout
           name="name"

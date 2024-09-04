@@ -36,16 +36,16 @@ const Chatting = (): JSX.Element => {
   const chatHistories = chatLog?.data?.conversation?.messages || [];
   const queryClient = useQueryClient();
 
-  const { isError } = useQuery('getUserState', Auth_UserState, {
-    refetchOnWindowFocus: false,
-    retry: 0
-  });
+  // const { isError } = useQuery('getUserState', Auth_UserState, {
+  //   refetchOnWindowFocus: false,
+  //   retry: 0
+  // });
 
-  useEffect(() => {
-    if (isError) {
-      navigate('/login');
-    }
-  });
+  // useEffect(() => {
+  //   if (isError) {
+  //     navigate('/login');
+  //   }
+  // });
 
   const { mutate: sendMessageMutate } = useMutation(Chat_Send, {
     onMutate: async (newMessage: { previousConversation: string }) => {

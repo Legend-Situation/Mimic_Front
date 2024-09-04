@@ -7,18 +7,18 @@ import { Upload_Image } from 'lib/api/Upload';
 interface ProfileLayoutProps {
   edit: boolean;
   profileImage: string;
-  setImageUrl: React.Dispatch<React.SetStateAction<string>>;
+  setImageUrl: (url: string) => void;
 }
 
-const ProfileLayout = ({
+const ProfileLayout: React.FC<ProfileLayoutProps> = ({
   edit,
   profileImage,
   setImageUrl
-}: ProfileLayoutProps) => {
+}) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [image, setImage] = useState(profileImage);
+  const [image, setImage] = useState<string>('');
 
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>): void => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
       const formData = new FormData();
@@ -26,8 +26,9 @@ const ProfileLayout = ({
 
       ImageUpload(formData, {
         onSuccess: (res) => {
-          setImage(URL.createObjectURL(file));
-          setImageUrl(res.data.url);
+          const uploadedUrl = res.data.url;
+          setImage(URL.createObjectURL(file)); // 로컬 미리보기 URL
+          setImageUrl(uploadedUrl); // 부모 컴포넌트로 URL 전달
         }
       });
     }
@@ -37,11 +38,13 @@ const ProfileLayout = ({
     onError: (err: any) => {
       if (err.status === 413) {
         alert('사진 용량이 너무 큽니다.');
+      } else {
+        console.error('Image upload failed:', err);
       }
     }
   });
 
-  const handleIconClick = () => {
+  const handleIconClick = (): void => {
     if (fileInputRef.current) {
       fileInputRef.current.click();
     }
@@ -50,7 +53,7 @@ const ProfileLayout = ({
   return (
     <_.ProfileLayout_Layout>
       <_.ProfileLayout_Container>
-        <_.ProfileLayout_Image src={image} />
+        <_.ProfileLayout_Image src={image ? image : profileImage} />
         <_.ProfileLayout_ProfileEdit edit={edit} onClick={handleIconClick}>
           <ProfileEdit />
         </_.ProfileLayout_ProfileEdit>
