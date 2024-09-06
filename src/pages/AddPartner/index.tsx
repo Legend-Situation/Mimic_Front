@@ -69,8 +69,8 @@ const AddPartner = () => {
   };
 
   useEffect(() => {
-    console.log(state);
-  }, [state]);
+    console.log(data.FileURL);
+  }, [data.FileURL]);
 
   const { mutate: CreateMutate } = useMutation(Chat_Create, {
     onSuccess: (res) => {
