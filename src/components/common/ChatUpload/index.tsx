@@ -34,11 +34,19 @@ function ChatUpload({
   };
 
   const { isLoading: ChatUploadLoading, mutate: ChatUploadMutate } =
-    useMutation(Upload_Chat, {
-      onSuccess: (res) => {
-        setData(res.data);
-      }
+    useMutation(Upload_Chat);
+
+  const onClearUrl = () => {
+    setData({
+      FileURL: '',
+      Contents: [
+        {
+          user1: '',
+          user2: ''
+        }
+      ]
     });
+  };
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -47,12 +55,20 @@ function ChatUpload({
       const formData = new FormData();
       formData.append('file', file);
       const fileExtension = file.name.split('.').pop()?.toLowerCase();
-      if (fileExtension === 'csv') {
-        setIsUploaded(true);
-        ChatUploadMutate(formData);
+
+      if (fileExtension === 'csv' || fileExtension === 'txt') {
+        ChatUploadMutate(formData, {
+          onSuccess: (res) => {
+            setData(res.data);
+            setIsUploaded(true);
+          },
+          onError: () => {
+            alert('파일 업로드 실패');
+            if (fileInputRef.current) fileInputRef.current.value = '';
+          }
+        });
       } else {
-        alert('CSV 파일만 업로드할 수 있습니다.');
-        setIsUploaded(false);
+        alert('txt 또는 csv 파일만 업로드할 수 있습니다.');
         if (fileInputRef.current) {
           fileInputRef.current.value = '';
         }
@@ -65,6 +81,7 @@ function ChatUpload({
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
+    onClearUrl();
     setSelectedPerson('');
   };
 
@@ -120,8 +137,11 @@ function ChatUpload({
 
         {!isUploaded && (
           <_.ChatUpload_Info>
-            카카오톡 대화방 → 설정 → 대화 내용 내보내기 → 모든 텍스트 내부
-            저장소에 저장 → csv 파일 업로드 (1:1 채팅만 가능)
+            모바일: 카카오톡 대화방 → 설정 → 대화 내용 내보내기 → 모든 텍스트
+            내부 저장소에 저장 → txt 파일 업로드 (1:1 채팅만 가능)
+            <br />
+            pc: 카카오톡 대화방 → 채팅방 설정 → 대화 내용 관리 → 대화 내용 저장
+            → csv 파일 업로드 (1:1 채팅만 가능)
           </_.ChatUpload_Info>
         )}
 
