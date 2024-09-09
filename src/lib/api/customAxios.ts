@@ -73,7 +73,6 @@ AuthInstance.interceptors.response.use(
 
           return axios.request(error.config);
         } else {
-          alert('로그인이 만료되었습니다. 다시 로그인해주세요.');
           return Promise.reject(error);
         }
       }
