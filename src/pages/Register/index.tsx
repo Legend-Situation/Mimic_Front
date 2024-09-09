@@ -7,6 +7,7 @@ import ButtonLayout from 'components/common/ButtonLayout';
 import { useMutation, useQuery } from 'react-query';
 import { Auth_SignUp, Auth_UserState } from 'lib/api/Auth';
 import { useNavigate } from 'react-router-dom';
+
 const Register = () => {
   const navigate = useNavigate();
   const welcome = '미믹에 오신 것을\n진심으로 환영합니다!';
@@ -26,7 +27,7 @@ const Register = () => {
     if (isSuccess) {
       navigate('/');
     }
-  });
+  }, [isSuccess, navigate]);
 
   const handleInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -39,11 +40,11 @@ const Register = () => {
   const isFormValid = () => {
     const { name, userid, password, passwordCheck } = inputs;
     return (
-      name == '' ||
-      userid == '' ||
-      password == '' ||
-      passwordCheck == '' ||
-      password !== passwordCheck
+      name !== '' &&
+      userid !== '' &&
+      password !== '' &&
+      passwordCheck !== '' &&
+      password === passwordCheck
     );
   };
 
@@ -58,6 +59,7 @@ const Register = () => {
   });
 
   const onSubmit = () => {
+    if (!isFormValid()) return;
     SignUpMutate({
       userid: inputs.userid,
       password: inputs.password,
@@ -113,7 +115,7 @@ const Register = () => {
             value="회원가입"
             onClick={onSubmit}
             width="100%"
-            state={!isFormValid()}
+            state={isFormValid()}
           />
         </_.Register_Button>
       </_.Register_Layout>

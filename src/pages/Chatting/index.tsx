@@ -15,7 +15,6 @@ import { Chat_Log, Chat_Send } from 'lib/api/Chat';
 import { ChatLog } from 'types/chatLog';
 import Profile from 'assets/image/Profile.png';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Auth_UserState } from 'lib/api/Auth';
 
 interface ChatMessage {
   role: string;
@@ -23,7 +22,6 @@ interface ChatMessage {
 }
 
 const Chatting = (): JSX.Element => {
-  const navigate = useNavigate();
   const [message, setMessage] = useState<string>('');
   const [pendingMessage, setPendingMessage] = useState<ChatMessage | null>(
     null
@@ -35,17 +33,6 @@ const Chatting = (): JSX.Element => {
   const params = useParams<{ id: string }>().id;
   const chatHistories = chatLog?.data?.conversation?.messages || [];
   const queryClient = useQueryClient();
-
-  // const { isError } = useQuery('getUserState', Auth_UserState, {
-  //   refetchOnWindowFocus: false,
-  //   retry: 0
-  // });
-
-  // useEffect(() => {
-  //   if (isError) {
-  //     navigate('/login');
-  //   }
-  // });
 
   const { mutate: sendMessageMutate } = useMutation(Chat_Send, {
     onMutate: async (newMessage: { previousConversation: string }) => {

@@ -56,10 +56,17 @@ const Login = () => {
     }
   });
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      onSubmit();
+    }
+  };
+
   return (
     <>
       <MainHeader title="로그인" />
-      <_.Login_Layout>
+      <_.Login_Layout onKeyDown={handleKeyDown}>
         <_.Login_Header>
           <Logo />
           <_.Login_Welcome>{welcome}</_.Login_Welcome>
