@@ -4,7 +4,7 @@ import styled from 'styled-components';
 export const Main_Layout = styled.div<{ isLoading: boolean }>`
   display: flex;
   width: 100%;
-  height: 100vh;
+  height: calc(100vh - 40px);
   padding-bottom: 40px;
   ${({ isLoading }) =>
     isLoading &&

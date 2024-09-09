@@ -16,7 +16,8 @@ export const Chat_Layout = styled.div`
 `;
 
 export const Chat_Image = styled.img`
-  width: 48px;
+  width: 100%;
+  max-width: 48px;
   height: 48px;
   border-radius: 20px;
   object-fit: cover;
@@ -38,6 +39,13 @@ export const Chat_Content = styled.p`
   color: ${theme.gray.black};
   font-size: 15px;
   font-weight: 400;
+  width: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  word-break: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 `;
 
 export const Chat_Time = styled.p`

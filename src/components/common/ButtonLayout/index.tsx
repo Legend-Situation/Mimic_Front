@@ -1,7 +1,5 @@
-// 라이브러리
-import React from 'react';
-
 // 파일
+import React from 'react';
 import * as _ from './style';
 
 interface OwnProps {
@@ -26,18 +24,16 @@ const ButtonLayout = ({
   textColor = ''
 }: OwnProps) => {
   return (
-    <_.ButtonLayout_Container width={width}>
-      <_.ButtonLayout_Button
-        onClick={onClick}
-        width={width}
-        disabled={!state}
-        backgroundColor={backgroundColor}
-        borderColor={borderColor}
-        textColor={textColor}
-      >
-        {value}
-      </_.ButtonLayout_Button>
-    </_.ButtonLayout_Container>
+    <_.ButtonLayout_Button
+      onClick={onClick}
+      width={width}
+      disabled={!state}
+      backgroundColor={backgroundColor}
+      borderColor={borderColor}
+      textColor={textColor}
+    >
+      {value}
+    </_.ButtonLayout_Button>
   );
 };
 

@@ -1,9 +1,6 @@
 import { theme } from 'lib/utils/style/theme';
 import styled from 'styled-components';
 
-export const ButtonLayout_Container = styled.div<{ width: string }>`
-  width: ${({ width }) => width};
-`;
 
 export const ButtonLayout_Button = styled.button<{
   width: string;
