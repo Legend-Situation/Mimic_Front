@@ -16,7 +16,8 @@ export const Chat_Layout = styled.div`
 `;
 
 export const Chat_Image = styled.img`
-  width: 48px;
+  width: 100%;
+  max-width: 48px;
   height: 48px;
   border-radius: 20px;
   object-fit: cover;
