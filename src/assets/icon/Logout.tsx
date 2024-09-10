@@ -8,7 +8,7 @@ const Logout = () => {
       onClick={() => {
         localStorage.removeItem('accessToken');
         localStorage.removeItem('refreshToken');
-        navigate('/login');
+        navigate('/auth');
       }}
       width="24"
       height="24"
