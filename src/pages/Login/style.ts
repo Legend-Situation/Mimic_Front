@@ -2,6 +2,10 @@ import { theme } from 'lib/utils/style/theme';
 import styled from 'styled-components';
 
 export const Login_Layout = styled.div`
+  position: fixed;
+`;
+
+export const Login_Container = styled.div`
   display: flex;
   width: 100%;
   height: calc(100vh - 40px);

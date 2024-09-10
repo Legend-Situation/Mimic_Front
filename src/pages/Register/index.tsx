@@ -68,9 +68,9 @@ const Register = () => {
   };
 
   return (
-    <>
+    <_.Register_Layout>
       <MainHeader title="회원가입" />
-      <_.Register_Layout>
+      <_.Register_Container>
         <_.Register_Header>
           <Logo />
           <_.Register_Welcome>{welcome}</_.Register_Welcome>
@@ -118,8 +118,8 @@ const Register = () => {
             state={isFormValid()}
           />
         </_.Register_Button>
-      </_.Register_Layout>
-    </>
+      </_.Register_Container>
+    </_.Register_Layout>
   );
 };
 

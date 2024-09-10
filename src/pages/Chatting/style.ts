@@ -7,6 +7,7 @@ export const Chatting_Layout = styled.div`
   display: flex;
   flex-direction: column;
   padding-bottom: 20px;
+  position: fixed;
 `;
 
 export const Chatting_Content = styled.div`

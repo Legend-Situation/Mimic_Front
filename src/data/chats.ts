@@ -1,4 +1,4 @@
-export const chatList = [
+export const chatListff = [
   {
     image: 'https://example.com/image1.jpg',
     time: '14:30',
