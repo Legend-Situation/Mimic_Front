@@ -7,6 +7,7 @@ export const Auth_Container = styled.div`
   padding: 70px 24px 0 24px;
   display: flex;
   flex-direction: column;
+  position: fixed;
   `;
 
 export const Auth_Title = styled.p`

@@ -1,10 +1,4 @@
-import React, {
-  useEffect,
-  useRef,
-  useState,
-  ChangeEvent,
-  KeyboardEvent
-} from 'react';
+import React, { useEffect, useRef, useState, ChangeEvent } from 'react';
 import MainHeader from 'components/Headers/MainHeader';
 import Message from 'components/Message';
 import * as _ from './style';
@@ -14,7 +8,7 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { Chat_Log, Chat_Send } from 'lib/api/Chat';
 import { ChatLog } from 'types/chatLog';
 import Profile from 'assets/image/Profile.png';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 interface ChatMessage {
   role: string;

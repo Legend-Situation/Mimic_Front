@@ -10,4 +10,5 @@ export const Splash_Container = styled.div`
   justify-content: center;
   align-items: center;
   padding-bottom: 20%;
+  position: fixed;
 `;

@@ -4,8 +4,7 @@ import styled from 'styled-components';
 export const Main_Layout = styled.div<{ isLoading: boolean }>`
   display: flex;
   width: 100%;
-  height: calc(100vh - 40px);
-  padding-bottom: 40px;
+  height: 100vh;
   ${({ isLoading }) =>
     isLoading &&
     `
@@ -13,6 +12,7 @@ export const Main_Layout = styled.div<{ isLoading: boolean }>`
     align-items: center;
   `}
   flex-direction: column;
+  position: fixed;
 `;
 
 export const Main_Nothing = styled.div`
@@ -44,7 +44,7 @@ export const Main_Add = styled.div`
 export const Main_Chats = styled.div`
   display: flex;
   flex-direction: column;
-  padding-bottom: 20px;
+  overflow: auto;
 `;
 
 export const Main_Loading_Container = styled.div`
