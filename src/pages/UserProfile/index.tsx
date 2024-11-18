@@ -9,6 +9,7 @@ import InfoInputLayout from 'components/common/InfoInputLayout';
 import { initialState, reducer, State } from 'lib/utils/AddPartnerReducer';
 import { useMutation, useQuery } from 'react-query';
 import { Chat_Delete, Chat_Get, Chat_Update } from 'lib/api/Chat';
+import Profile from 'assets/image/Profile.png';
 
 const UserProfile: React.FC = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -124,7 +125,7 @@ const UserProfile: React.FC = () => {
       <_.UserProfile_Layout>
         <ProfileLayout
           edit={isEditing}
-          profileImage={state.profileImg}
+          profileImage={state.profileImg || Profile}
           setImageUrl={handleSetImageUrl}
         />
         <LineInputLayout
