@@ -35,3 +35,7 @@ export const InputLayout_Box = styled.input`
     font-weight: 500;
   }
 `;
+
+export const InputLayout_ErrorMessage = styled.p`
+  color: red;
+`;

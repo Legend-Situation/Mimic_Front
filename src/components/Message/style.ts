@@ -11,7 +11,8 @@ export const Message_Layout = styled.div<{ role?: string }>`
 export const Message_Image = styled.img`
   width: 36px;
   height: 36px;
-  border-radius: 10px;
+  border-radius: 52.8px;
+  object-fit: cover;
 `;
 
 export const Message_Right = styled.div`

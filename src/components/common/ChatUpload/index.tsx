@@ -59,6 +59,7 @@ function ChatUpload({
       if (fileExtension === 'csv' || fileExtension === 'txt') {
         ChatUploadMutate(formData, {
           onSuccess: (res) => {
+            console.log(res)
             setData(res.data);
             setIsUploaded(true);
           },
