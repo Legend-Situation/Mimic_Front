@@ -67,7 +67,7 @@ const AddPartner = () => {
       selectedPerson == ''
     );
   };
-  
+
   const { mutate: CreateMutate } = useMutation(Chat_Create, {
     onSuccess: (res) => {
       alert(res.message);
