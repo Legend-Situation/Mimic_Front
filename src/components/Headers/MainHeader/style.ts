@@ -10,6 +10,7 @@ export const MainHeader_Container = styled.div<{ isOnChatting?: boolean }>`
   align-items: center;
   flex-shrink: 0;
   position: relative;
+  cursor: pointer;
 `;
 
 export const MainHeader_BackIcon = styled.div`

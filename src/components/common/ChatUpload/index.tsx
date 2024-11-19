@@ -36,6 +36,8 @@ function ChatUpload({
   const { isLoading: ChatUploadLoading, mutate: ChatUploadMutate } =
     useMutation(Upload_Chat);
 
+  
+
   const onClearUrl = () => {
     setData({
       FileURL: '',
@@ -157,22 +159,28 @@ function ChatUpload({
                 <_.ChatUpload_Option value="">
                   상대방의 카카오톡 이름을 선택해주세요.
                 </_.ChatUpload_Option>
-                {data.Contents.map((person: any, index: number) => (
-                  <>
-                    <_.ChatUpload_Option
-                      key={`${index}_user1`}
-                      value={person.user1}
-                    >
-                      {person.user1}
-                    </_.ChatUpload_Option>
-                    <_.ChatUpload_Option
-                      key={`${index}_user2`}
-                      value={person.user2}
-                    >
-                      {person.user2}
-                    </_.ChatUpload_Option>
-                  </>
-                ))}
+                {data.Contents && data.Contents.length > 0 ? (
+                  data.Contents.map((person: any, index: number) => (
+                    <>
+                      <_.ChatUpload_Option
+                        key={`${index}_user1`}
+                        value={person.user1}
+                      >
+                        {person.user1}
+                      </_.ChatUpload_Option>
+                      <_.ChatUpload_Option
+                        key={`${index}_user2`}
+                        value={person.user2}
+                      >
+                        {person.user2}
+                      </_.ChatUpload_Option>
+                    </>
+                  ))
+                ) : (
+                  <_.ChatUpload_Option value="">
+                    선택할 수 있는 사람이 없습니다.
+                  </_.ChatUpload_Option>
+                )}
               </_.ChatUpload_Dropdown>
               <_.ChatUpload_Arrow>
                 <Down />
