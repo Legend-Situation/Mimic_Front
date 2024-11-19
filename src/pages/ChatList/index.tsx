@@ -67,7 +67,7 @@ const Main = () => {
   const reverseChatList = [...chatList].reverse();
 
   return (
-    <_.Main_Layout isLoading={newChatLisLoading}>
+    <_.Main_Layout>
       <ChatHeader />
       {newChatLisLoading ? (
         <_.Main_Loading_Container>
@@ -93,7 +93,7 @@ const Main = () => {
           })}
         </_.Main_Chats>
       ) : (
-        <_.Main_Nothing>
+        <_.Main_Nothing isLoading={newChatLisLoading}>
           <Logo color={theme.gray[100]} />
           <_.Main_Notice>아직 채팅이 시작되지 않았어요...</_.Main_Notice>
           <_.Main_Add

@@ -1,21 +1,15 @@
 import { theme } from 'lib/utils/style/theme';
 import styled from 'styled-components';
 
-export const Main_Layout = styled.div<{ isLoading: boolean }>`
+export const Main_Layout = styled.div`
   display: flex;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
-  ${({ isLoading }) =>
-    isLoading &&
-    `
-    justify-content: center; 
-    align-items: center;
-  `}
   flex-direction: column;
   position: fixed;
 `;
 
-export const Main_Nothing = styled.div`
+export const Main_Nothing = styled.div<{ isLoading: boolean }>`
   width: 100%;
   height: 100%;
   display: flex;
@@ -23,6 +17,12 @@ export const Main_Nothing = styled.div`
   justify-content: center;
   align-items: center;
   gap: 20px;
+  ${({ isLoading }) =>
+    isLoading &&
+    `
+    justify-content: center; 
+    align-items: center;
+  `}
 `;
 
 export const Main_Notice = styled.div`
